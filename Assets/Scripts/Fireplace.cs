@@ -5,8 +5,9 @@ using UnityEngine;
 public class Fireplace : MonoBehaviour
 {
 
-    private float power = 50f;
+    [SerializeField] private float power = 50f;
     [SerializeField] private Vector2 powerRange;
+    [SerializeField] private float unPowerSpeed;
 
     //mainLight
     public Light mainLight;
@@ -29,6 +30,8 @@ public class Fireplace : MonoBehaviour
     [SerializeField] private Vector2 flamesQty;   
 
 
+
+
     private void Start()
     {
         SetPower(power);
@@ -43,14 +46,16 @@ public class Fireplace : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.P)) 
         {
             AddPower(10);
-        }  
+        }
+
+        AddPower(-unPowerSpeed * Time.deltaTime);
     }
 
     void SetPower(float newPower)
     {
         AddPower(newPower - power);
     }
-    void AddPower(float n)
+    public void AddPower(float n)
     {
         power = Mathf.Clamp(power + n, powerRange.x, powerRange.y);
 

@@ -54,15 +54,23 @@ public class PlayerController : MonoBehaviour
         characterController.Move(Vector3.down * 20f * Time.deltaTime);
         if (Input.GetKey(KeyCode.E) && actionKeyUp)
         {
-            if (item != null)
-               StartCoroutine(DropItem());
+         
 
             Vector3 p1 = transform.position + characterController.center + Vector3.up * -characterController.height * 0.5F;
             Vector3 p2 = p1 + Vector3.up * characterController.height;
-            Collider[] colliders = Physics.OverlapCapsule(p1 + transform.forward / 2f, p2 + transform.forward / 2f, 0.5f).Where(c => c.gameObject.tag == "Item").ToArray();
+            Collider[] colliders = Physics.OverlapCapsule(p1 + transform.forward / 2f, p2 + transform.forward / 2f, 0.5f, 
+                LayerMask.GetMask("Items", "Fireplace"), queryTriggerInteraction: QueryTriggerInteraction.Collide).ToArray();
+            if (colliders.Any(c => c.gameObject.tag == "Fire") && item !=null)
+                StartCoroutine(DropItemInFire(item, colliders.Where(c => c.gameObject.tag == "Fire").First().transform));
+            else
+            {
+                if (item != null)
+                    StartCoroutine(DropItem(item));
 
-            if (colliders.Length > 0)
-                PickItem(colliders.First().gameObject);
+
+                if (colliders.Where(c => c.gameObject.tag == "Item").ToArray().Length > 0)
+                    PickItem(colliders.Where(c => c.gameObject.tag == "Item").First().gameObject);
+            }
         }
       
     }
@@ -78,6 +86,7 @@ public class PlayerController : MonoBehaviour
 
     void PickItem(GameObject g)
     {
+      
         Debug.Log("PickItem");
 
         actionKeyUp = false;
@@ -90,11 +99,10 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    IEnumerator DropItem()
+    IEnumerator DropItem(Item obj)
     {
         if (item!= null)
         {
-            Item obj = item;
             item = null;
 
             Debug.Log("DROP");
@@ -114,5 +122,30 @@ public class PlayerController : MonoBehaviour
 
 
     }
+    IEnumerator DropItemInFire(Item obj, Transform fireplace)
+    {
+        if (item != null)
+        {
+            item = null;
 
+            Debug.Log("DROP IN FIRE");
+            Debug.Log(fireplace.name);
+            Debug.Log(fireplace.GetComponentInChildren<Fireplace>());
+            fireplace.GetComponentInChildren<Fireplace>().AddPower(obj.illumination);
+            actionKeyUp = false;
+            obj.gameObject.tag = "Untagged";
+            obj.transform.parent = null;
+            obj.transform.position = fireplace.position + Vector3.up * 2f;
+            obj.GetComponent<Rigidbody>().isKinematic = false;
+            obj.GetComponent<Rigidbody>().AddExplosionForce(5f, obj.transform.position - Vector3.up, 5f);
+            obj.GetComponent<Rigidbody>().AddTorque(new Vector3(2f, 2f, 2f) * 3f, ForceMode.Impulse);
+
+            yield return new WaitForSeconds(0.1f);
+            obj.GetComponent<Collider>().enabled = true;
+
+        }
+
+
+
+    }
 }
