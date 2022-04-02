@@ -86,7 +86,8 @@ public class PlayerController : MonoBehaviour
             actionKeyUp = true;
 
         }
-
+        if (Input.GetKeyDown(KeyCode.G))
+            FindObjectOfType<GameManager>().GameOver();
        // IsInsideLight();
 
     } 
