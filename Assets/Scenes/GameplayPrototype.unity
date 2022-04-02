@@ -262,6 +262,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &274586479 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198205007009897148, guid: 89956e675b749204c8e10395ce2b5fb9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683437292}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &441892894 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198778633208645958, guid: 89956e675b749204c8e10395ce2b5fb9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683437292}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &814003792
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,6 +306,12 @@ Transform:
   m_Father: {fileID: 1371399881}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &849795750 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198168859160489886, guid: 89956e675b749204c8e10395ce2b5fb9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683437292}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &889931420
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,6 +407,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &906656110 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198260517930635872, guid: 89956e675b749204c8e10395ce2b5fb9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683437292}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &946819753 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4521404770085940, guid: 89956e675b749204c8e10395ce2b5fb9,
@@ -527,6 +551,13 @@ MonoBehaviour:
   mainLightDistanceRange: {x: 0, y: 60}
   blinkingLight: {fileID: 1666028327}
   blinkingLightDistanceRange: {x: 0, y: 5}
+  flame1: {fileID: 274586479}
+  flame2: {fileID: 906656110}
+  glow: {fileID: 849795750}
+  sparks: {fileID: 441892894}
+  flamesRange: {x: 0, y: 2.01}
+  flamesAngle: {x: 5, y: 30}
+  flamesQty: {x: 0, y: 15}
 --- !u!4 &1371399881
 Transform:
   m_ObjectHideFlags: 0
