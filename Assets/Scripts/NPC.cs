@@ -8,6 +8,7 @@ public class NPC : MonoBehaviour
     NavMeshAgent agent;
     float waitInPlaceTime = 2f;
     float t;
+    Animator animator;
 
     void Start()
     {
@@ -16,6 +17,7 @@ public class NPC : MonoBehaviour
         agent.destination = transform.position;
         agent.avoidancePriority = Random.Range(10, 99);
         t = Mathf.Infinity;
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -36,6 +38,11 @@ public class NPC : MonoBehaviour
         }
 
 
+    }
+
+    private void LateUpdate()
+    {
+        animator.SetFloat("Speed", agent.velocity.magnitude);
     }
 
     void SetNewDestination()
