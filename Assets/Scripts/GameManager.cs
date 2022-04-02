@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     private float fadeTime = 2f;
     [SerializeField] Image fadePanel;
     [SerializeField] Image gameOverPopup;
+    [SerializeField] GameObject winGameObject;
     bool alreadyEnded = false;
     public async void GameOver()
     {
@@ -31,6 +32,9 @@ public class GameManager : MonoBehaviour
         alreadyEnded = true;
         fadePanel.Fade(fadeTime);
         await Task.Delay(2000);
+        winGameObject.SetActive(true);
+        fadePanel.Unfade(fadeTime);
+        await Task.Delay(10000);
         SceneManager.LoadScene(1);
     }
 }

@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private Item item = null;
 
     [SerializeField] SetPosition setPosOfPlaceHolder;
+    [SerializeField] List<GameObject> models;
 
     private bool actionKeyUp = true;
     void Start()
@@ -24,6 +25,13 @@ public class PlayerController : MonoBehaviour
         setPosOfPlaceHolder.enabled = true;
         setPosOfPlaceHolder.target = transform;//transform.Find("Model").GetChild(index).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0);
         characterController = GetComponent<CharacterController>();
+        foreach (var m in models)
+        {
+            m.SetActive(false);
+        }
+
+        models.Random().SetActive(true);
+
         animator = GetComponentInChildren<Animator>();
     }
 
