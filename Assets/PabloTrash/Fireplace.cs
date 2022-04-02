@@ -15,6 +15,7 @@ public class Fireplace : MonoBehaviour
 
     //blinkingLight
     public Light blinkingLight;
+    [SerializeField] private Vector2 blinkingLightDistanceRange;
 
     private void Start()
     {
@@ -43,7 +44,7 @@ public class Fireplace : MonoBehaviour
 
         mainLight.intensity = Mathf.LerpUnclamped(mainLightIntensityRange.x, mainLightIntensityRange.y, power/100);
         mainLight.range = Mathf.LerpUnclamped(mainLightDistanceRange.x, mainLightDistanceRange.y, power/100);
-        blinkingLight.range = Mathf.LerpUnclamped(0, mainLightDistanceRange.y/4f, power/100);
+        blinkingLight.range = Mathf.LerpUnclamped(blinkingLightDistanceRange.x, blinkingLightDistanceRange.y, power/100);
 
     }
     

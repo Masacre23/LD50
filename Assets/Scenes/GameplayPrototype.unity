@@ -524,8 +524,9 @@ MonoBehaviour:
   powerRange: {x: 0, y: 100}
   mainLight: {fileID: 139865651}
   mainLightIntensityRange: {x: 0, y: 10}
-  mainLightDistanceRange: {x: 0, y: 30}
+  mainLightDistanceRange: {x: 0, y: 60}
   blinkingLight: {fileID: 1666028327}
+  blinkingLightDistanceRange: {x: 0, y: 5}
 --- !u!4 &1371399881
 Transform:
   m_ObjectHideFlags: 0
