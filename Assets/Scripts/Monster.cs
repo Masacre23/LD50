@@ -40,10 +40,20 @@ public class Monster : MonoBehaviour
 
     void SetNewDestination()
     {
-        Vector3 dest = GetValidPointAroundFireplace();
+        Vector3 dest = -Vector3.one;
+        if (!FindObjectOfType<PlayerController>().IsInsideLight())
+        {
+            dest = GetValidPointAroundPlayer();
+        }
+        else
+        {
+             dest = GetValidPointAroundFireplace();
+          
+        }
+
         if (dest != -Vector3.one)
         {
-        //    Debug.Log(Vector3.Distance(FindObjectOfType<Fireplace>().transform.position, dest));
+            //    Debug.Log(Vector3.Distance(FindObjectOfType<Fireplace>().transform.position, dest));
             agent.SetDestination(dest);
 
         }
@@ -55,7 +65,7 @@ public class Monster : MonoBehaviour
         float maxDistance = Mathf.Lerp(minDistance,
             FindObjectOfType<Fireplace>().mainLightDistanceRange.y / 5f,
             FindObjectOfType<Fireplace>().GetPower() / FindObjectOfType<Fireplace>().powerRange.y);
-       // Debug.Log(maxDistance);
+        // Debug.Log(maxDistance);
         float maxMaxDistance = Random.Range(maxDistance, 100f);
         Vector2 aroundness = Random.insideUnitCircle.normalized * maxMaxDistance;
         Vector3 startPoint = FindObjectOfType<Fireplace>().transform.position;
@@ -65,6 +75,24 @@ public class Monster : MonoBehaviour
         if (NavMesh.SamplePosition(startPoint, out hit, 10.0f, NavMesh.AllAreas))
         {
             waitInPlaceTime = Random.Range(2f, 10f);
+            return hit.position;
+        }
+        waitInPlaceTime = Random.Range(0.1f, 0.2f);
+        return -Vector3.one;
+    }
+
+
+    Vector3 GetValidPointAroundPlayer()
+    {
+      
+        Vector2 aroundness = Random.insideUnitCircle.normalized * Random.Range(0.25f, 0.5f);
+        Vector3 startPoint = FindObjectOfType<PlayerController>().transform.position;
+        startPoint.x += aroundness.x;
+        startPoint.z += aroundness.y;
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(startPoint, out hit, 10.0f, NavMesh.AllAreas))
+        {
+            waitInPlaceTime = Random.Range(0.5f, 1f);
             return hit.position;
         }
         waitInPlaceTime = Random.Range(0.1f, 0.2f);

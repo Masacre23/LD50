@@ -60,8 +60,13 @@ public class PlayerController : MonoBehaviour
             Vector3 p2 = p1 + Vector3.up * characterController.height;
             Collider[] colliders = Physics.OverlapCapsule(p1 + transform.forward / 2f, p2 + transform.forward / 2f, 0.5f, 
                 LayerMask.GetMask("Items", "Fireplace"), queryTriggerInteraction: QueryTriggerInteraction.Collide).ToArray();
-            if (colliders.Any(c => c.gameObject.tag == "Fire") && item !=null)
+            if (colliders.Any(c => c.gameObject.tag == "Fire"))
+            {
+                GetComponent<PlayerLight>().SetPower(Mathf.Infinity);
+                if (item != null)
                 StartCoroutine(DropItemInFire(item, colliders.Where(c => c.gameObject.tag == "Fire").First().transform));
+
+            }
             else
             {
                 if (item != null)
@@ -151,13 +156,13 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    bool IsInsideLight()
+   public bool IsInsideLight()
     {
       //  Debug.Log(Vector3.Distance(transform.position, FindObjectOfType<Fireplace>().transform.position) + "  <  " +
       //      FindObjectOfType<Fireplace>().GetLightDistance());
 
         return (Vector3.Distance(transform.position, FindObjectOfType<Fireplace>().transform.position) <
-            FindObjectOfType<Fireplace>().GetLightDistance());
+            FindObjectOfType<Fireplace>().GetLightDistance() || FindObjectOfType<PlayerLight>().GetPower() > 0f);
 
     }
 }
