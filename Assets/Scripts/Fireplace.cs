@@ -63,8 +63,8 @@ public class Fireplace : MonoBehaviour
         power = Mathf.Clamp(power + n, powerRange.x, powerRange.y);
 
         mainLight.intensity = Mathf.Lerp(mainLightIntensityRange.x, mainLightIntensityRange.y, power/ powerRange.y);
-        mainLight.range = Mathf.Lerp(mainLightDistanceRange.x, mainLightDistanceRange.y, power/100);
-        blinkingLight.range = Mathf.Lerp(blinkingLightDistanceRange.x, blinkingLightDistanceRange.y, power/100);
+        mainLight.range = Mathf.Lerp(mainLightDistanceRange.x, mainLightDistanceRange.y, power/ powerRange.y);
+        blinkingLight.range = Mathf.Lerp(blinkingLightDistanceRange.x, blinkingLightDistanceRange.y, power/ powerRange.y);
 
         var sh1 = flame1.shape;                       
         sh1.radius = Mathf.Lerp(flamesRange.x, flamesRange.y, power/ powerRange.y);
@@ -96,4 +96,8 @@ public class Fireplace : MonoBehaviour
     }
 
 
+    public float GetLightDistance()
+    {
+        return Mathf.Lerp(mainLightDistanceRange.x, mainLightDistanceRange.y, power / powerRange.y)*0.5f;  
+    }
 }

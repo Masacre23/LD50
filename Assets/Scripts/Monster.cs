@@ -43,6 +43,7 @@ public class Monster : MonoBehaviour
         Vector3 dest = GetValidPointAroundFireplace();
         if (dest != -Vector3.one)
         {
+        //    Debug.Log(Vector3.Distance(FindObjectOfType<Fireplace>().transform.position, dest));
             agent.SetDestination(dest);
 
         }
@@ -54,8 +55,9 @@ public class Monster : MonoBehaviour
         float maxDistance = Mathf.Lerp(minDistance,
             FindObjectOfType<Fireplace>().mainLightDistanceRange.y / 5f,
             FindObjectOfType<Fireplace>().GetPower() / FindObjectOfType<Fireplace>().powerRange.y);
-        float maxMaxDistance = Mathf.Lerp(maxDistance, 100f, FindObjectOfType<Fireplace>().GetPower() / FindObjectOfType<Fireplace>().powerRange.y);
-        Vector2 aroundness = Random.insideUnitCircle.normalized * maxDistance;
+       // Debug.Log(maxDistance);
+        float maxMaxDistance = Random.Range(maxDistance, 100f);
+        Vector2 aroundness = Random.insideUnitCircle.normalized * maxMaxDistance;
         Vector3 startPoint = FindObjectOfType<Fireplace>().transform.position;
         startPoint.x += aroundness.x;
         startPoint.z += aroundness.y;

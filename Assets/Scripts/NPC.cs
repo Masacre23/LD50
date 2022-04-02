@@ -51,9 +51,8 @@ public class NPC : MonoBehaviour
     Vector3 GetValidPointAroundFireplace()
     {
         float minDistance = Mathf.Lerp(1, 10, FindObjectOfType<Fireplace>().GetPower() / FindObjectOfType<Fireplace>().powerRange.y);
-        float maxDistance = Mathf.Lerp(minDistance,
-            FindObjectOfType<Fireplace>().mainLightDistanceRange.y / 5f,
-            FindObjectOfType<Fireplace>().GetPower() / FindObjectOfType<Fireplace>().powerRange.y);
+        float maxDistance = Random.Range(minDistance,
+            FindObjectOfType<Fireplace>().mainLightDistanceRange.y / 5f);
 
         Vector2 aroundness = Random.insideUnitCircle.normalized * maxDistance;
         Vector3 startPoint = FindObjectOfType<Fireplace>().transform.position;

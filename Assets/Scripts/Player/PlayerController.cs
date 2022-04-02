@@ -82,6 +82,8 @@ public class PlayerController : MonoBehaviour
 
         }
 
+       // IsInsideLight();
+
     } 
 
     void PickItem(GameObject g)
@@ -146,6 +148,16 @@ public class PlayerController : MonoBehaviour
         }
 
 
+
+    }
+
+    bool IsInsideLight()
+    {
+      //  Debug.Log(Vector3.Distance(transform.position, FindObjectOfType<Fireplace>().transform.position) + "  <  " +
+      //      FindObjectOfType<Fireplace>().GetLightDistance());
+
+        return (Vector3.Distance(transform.position, FindObjectOfType<Fireplace>().transform.position) <
+            FindObjectOfType<Fireplace>().GetLightDistance());
 
     }
 }
