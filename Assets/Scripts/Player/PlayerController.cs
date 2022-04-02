@@ -140,6 +140,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log(fireplace.name);
             Debug.Log(fireplace.GetComponentInChildren<Fireplace>());
             fireplace.GetComponentInChildren<Fireplace>().AddPower(obj.illumination);
+            fireplace.GetComponentInChildren<Fireplace>().ChangeFireColor(obj.type);
             actionKeyUp = false;
             obj.gameObject.tag = "Untagged";
             obj.transform.parent = null;
