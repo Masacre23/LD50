@@ -10,7 +10,7 @@ public enum ItemType
     DEFAULT
 }
 
-public class Item
+public class Item : MonoBehaviour
 {
     public float illumination = 0f;
     public ItemType type;
