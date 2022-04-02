@@ -6,13 +6,13 @@ public class Fireplace : MonoBehaviour
 {
 
     [SerializeField] private float power = 50f;
-    [SerializeField] private Vector2 powerRange;
+    [SerializeField] public Vector2 powerRange;
     [SerializeField] private float unPowerSpeed;
 
     //mainLight
     public Light mainLight;
     [SerializeField] private Vector2 mainLightIntensityRange;
-    [SerializeField] private Vector2 mainLightDistanceRange;
+    [SerializeField] public Vector2 mainLightDistanceRange;
 
     //blinkingLight
     public Light blinkingLight;
@@ -50,7 +50,10 @@ public class Fireplace : MonoBehaviour
 
         AddPower(-unPowerSpeed * Time.deltaTime);
     }
-
+    public float GetPower()
+    {
+        return power;
+    }
     void SetPower(float newPower)
     {
         AddPower(newPower - power);
@@ -59,37 +62,37 @@ public class Fireplace : MonoBehaviour
     {
         power = Mathf.Clamp(power + n, powerRange.x, powerRange.y);
 
-        mainLight.intensity = Mathf.LerpUnclamped(mainLightIntensityRange.x, mainLightIntensityRange.y, power/100);
-        mainLight.range = Mathf.LerpUnclamped(mainLightDistanceRange.x, mainLightDistanceRange.y, power/100);
-        blinkingLight.range = Mathf.LerpUnclamped(blinkingLightDistanceRange.x, blinkingLightDistanceRange.y, power/100);
+        mainLight.intensity = Mathf.Lerp(mainLightIntensityRange.x, mainLightIntensityRange.y, power/ powerRange.y);
+        mainLight.range = Mathf.Lerp(mainLightDistanceRange.x, mainLightDistanceRange.y, power/100);
+        blinkingLight.range = Mathf.Lerp(blinkingLightDistanceRange.x, blinkingLightDistanceRange.y, power/100);
 
         var sh1 = flame1.shape;                       
-        sh1.radius = Mathf.LerpUnclamped(flamesRange.x, flamesRange.y, power/100);
-        sh1.angle = Mathf.LerpUnclamped(flamesAngle.x, flamesAngle.y, power/100);
+        sh1.radius = Mathf.Lerp(flamesRange.x, flamesRange.y, power/ powerRange.y);
+        sh1.angle = Mathf.Lerp(flamesAngle.x, flamesAngle.y, power/ powerRange.y);
         var em1 = flame1.emission;
-        em1.rateOverTime = Mathf.LerpUnclamped(flamesQty.x, flamesQty.y, power/100);
+        em1.rateOverTime = Mathf.Lerp(flamesQty.x, flamesQty.y, power/ powerRange.y);
         var m1 = flame1.main;
-        m1.startSize = Mathf.LerpUnclamped(flamesSize.x, flamesSize.y, power / 100);
+        m1.startSize = Mathf.Lerp(flamesSize.x, flamesSize.y, power / powerRange.y);
 
         var sh2 = flame2.shape;
-        sh2.radius = Mathf.LerpUnclamped(flamesRange.x, flamesRange.y, power / 100);
-        sh2.angle = Mathf.LerpUnclamped(flamesAngle.x, flamesAngle.y, power / 100);
+        sh2.radius = Mathf.Lerp(flamesRange.x, flamesRange.y, power / powerRange.y);
+        sh2.angle = Mathf.Lerp(flamesAngle.x, flamesAngle.y, power / powerRange.y);
         var em2 = flame2.emission;
-        em2.rateOverTime = Mathf.LerpUnclamped(flamesQty.x, flamesQty.y, power / 100);
+        em2.rateOverTime = Mathf.Lerp(flamesQty.x, flamesQty.y, power / powerRange.y);
         var m2 = flame2.main;
-        m2.startSize = Mathf.LerpUnclamped(flamesSize.x*0.75f, flamesSize.y * 0.75f, power / 100);
+        m2.startSize = Mathf.Lerp(flamesSize.x*0.75f, flamesSize.y * 0.75f, power / powerRange.y);
 
         var sh3 = glow.shape;
-        sh3.radius = Mathf.LerpUnclamped(flamesRange.x, flamesRange.y, power / 100);
-        sh3.angle = Mathf.LerpUnclamped(flamesAngle.x, flamesAngle.y, power / 100);
+        sh3.radius = Mathf.Lerp(flamesRange.x, flamesRange.y, power / powerRange.y);
+        sh3.angle = Mathf.Lerp(flamesAngle.x, flamesAngle.y, power / powerRange.y);
         var em3 = glow.emission;
-        em3.rateOverTime = Mathf.LerpUnclamped(flamesQty.x, flamesQty.y, power / 100);
+        em3.rateOverTime = Mathf.Lerp(flamesQty.x, flamesQty.y, power / powerRange.y);
 
         var sh4 = sparks.shape;
-        sh4.radius = Mathf.LerpUnclamped(flamesRange.x, flamesRange.y, power / 100);
-        sh4.angle = Mathf.LerpUnclamped(flamesAngle.x, flamesAngle.y, power / 100);
+        sh4.radius = Mathf.Lerp(flamesRange.x, flamesRange.y, power / powerRange.y);
+        sh4.angle = Mathf.Lerp(flamesAngle.x, flamesAngle.y, power / powerRange.y);
         var em4 = sparks.emission;
-        em4.rateOverTime = Mathf.LerpUnclamped(flamesQty.x, flamesQty.y*5f, power / 100);
+        em4.rateOverTime = Mathf.Lerp(flamesQty.x, flamesQty.y*5f, power / powerRange.y);
     }
 
 
