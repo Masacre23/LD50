@@ -23,6 +23,7 @@ public class Fireplace : MonoBehaviour
     public ParticleSystem flame2;
     public ParticleSystem glow;
     public ParticleSystem sparks;
+    [SerializeField] private Vector2 flamesSize;
     [SerializeField] private Vector2 flamesRange;
     [SerializeField] private Vector2 flamesAngle;
     [SerializeField] private Vector2 flamesQty;   
@@ -62,12 +63,16 @@ public class Fireplace : MonoBehaviour
         sh1.angle = Mathf.LerpUnclamped(flamesAngle.x, flamesAngle.y, power/100);
         var em1 = flame1.emission;
         em1.rateOverTime = Mathf.LerpUnclamped(flamesQty.x, flamesQty.y, power/100);
-  
+        var m1 = flame1.main;
+        m1.startSize = Mathf.LerpUnclamped(flamesSize.x, flamesSize.y, power / 100);
+
         var sh2 = flame2.shape;
         sh2.radius = Mathf.LerpUnclamped(flamesRange.x, flamesRange.y, power / 100);
         sh2.angle = Mathf.LerpUnclamped(flamesAngle.x, flamesAngle.y, power / 100);
         var em2 = flame2.emission;
         em2.rateOverTime = Mathf.LerpUnclamped(flamesQty.x, flamesQty.y, power / 100);
+        var m2 = flame2.main;
+        m2.startSize = Mathf.LerpUnclamped(flamesSize.x*0.75f, flamesSize.y * 0.75f, power / 100);
 
         var sh3 = glow.shape;
         sh3.radius = Mathf.LerpUnclamped(flamesRange.x, flamesRange.y, power / 100);

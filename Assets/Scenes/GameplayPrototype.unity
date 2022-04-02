@@ -555,6 +555,7 @@ MonoBehaviour:
   flame2: {fileID: 906656110}
   glow: {fileID: 849795750}
   sparks: {fileID: 441892894}
+  flamesSize: {x: 2.5, y: 5}
   flamesRange: {x: 0, y: 2.01}
   flamesAngle: {x: 5, y: 30}
   flamesQty: {x: 0, y: 15}
