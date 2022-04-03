@@ -18,8 +18,12 @@ public class Item : MonoBehaviour
     private bool burned = false;
     private void Start()
     {
-        GetComponent<Outline>().OutlineWidth = 0f;
-
+        if (GetComponent<Outline>())
+            GetComponent<Outline>().OutlineWidth = 0f;
+        foreach (var item in GetComponentsInChildren<Outline>())
+        {
+            item.OutlineWidth = 0f;
+        }
         FindObjectOfType<GameManager>().worldItems++;
     }
 
@@ -27,8 +31,12 @@ public class Item : MonoBehaviour
     public void Burned()
     {
         burned = true;
-        GetComponent<Outline>().OutlineWidth = 0f;
-
+        if (GetComponent<Outline>())
+            GetComponent<Outline>().OutlineWidth = 0f;
+        foreach (var item in GetComponentsInChildren<Outline>())
+        {
+            item.OutlineWidth = 0f;
+        }
         FindObjectOfType<GameManager>().worldItems--;
         Destroy(gameObject, 5f);
     }
@@ -45,8 +53,12 @@ public class Item : MonoBehaviour
         }
         else if (highlighting != null)
         {
-            GetComponent<Outline>().OutlineWidth = 0f;
-
+            if (GetComponent<Outline>())
+                GetComponent<Outline>().OutlineWidth = 0f;
+            foreach (var item in GetComponentsInChildren<Outline>())
+            {
+                item.OutlineWidth = 0f;
+            }
 
             StopCoroutine(highlighting);
             highlighting = null;
@@ -66,8 +78,13 @@ public class Item : MonoBehaviour
             while (Time.time - t < tAnim && !burned)
             {
                 tInter = (Time.time - t) / tAnim;
-                
-                GetComponent<Outline>().OutlineWidth = tInter * 3f;
+
+                if (GetComponent<Outline>())
+                    GetComponent<Outline>().OutlineWidth = tInter * 3f;
+                foreach (var item in GetComponentsInChildren<Outline>())
+                {
+                    item.OutlineWidth = tInter * 3f;
+                }
                 yield return new WaitForFixedUpdate();
             }
 
@@ -75,11 +92,15 @@ public class Item : MonoBehaviour
             tInter = 0;
             while (Time.time - t < tAnim && !burned)
             {
-                tInter =1-((Time.time - t) / tAnim);
-            
+                tInter = 1 - ((Time.time - t) / tAnim);
 
-                GetComponent<Outline>().OutlineWidth = tInter *3f;
 
+                if (GetComponent<Outline>())
+                    GetComponent<Outline>().OutlineWidth = tInter * 3f;
+                foreach (var item in GetComponentsInChildren<Outline>())
+                {
+                    item.OutlineWidth = tInter * 3f;
+                }
                 yield return new WaitForFixedUpdate();
             }
         }
