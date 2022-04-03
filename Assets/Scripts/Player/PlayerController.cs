@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
     void PickItem(GameObject g)
     {
       
-        Debug.Log("PickItem");
+       // Debug.Log("PickItem");
 
         actionKeyUp = false;
         g.transform.parent = GetComponentInChildren<SetPosition>().transform;
