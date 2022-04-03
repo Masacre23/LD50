@@ -29,7 +29,7 @@ public class Item : MonoBehaviour
         {
             foreach (var m in item.materials)
             {
-                m.SetColor("_HColor", Color.black);
+                m.SetColor("_HColor", Color.red);
 
             }
 
@@ -78,7 +78,7 @@ public class Item : MonoBehaviour
             while (Time.time - t < tAnim && !burned)
             {
                 tInter = (Time.time - t) / tAnim;
-                Color c = Color.Lerp(Color.white, Color.black, tInter);
+                Color c = Color.Lerp(Color.white, Color.red, tInter);
                 foreach (var item in gameObject.GetComponentsInChildren<Renderer>())
                 {
                     foreach (var m in item.materials)
@@ -96,7 +96,7 @@ public class Item : MonoBehaviour
             while (Time.time - t < tAnim && !burned)
             {
                 tInter =((Time.time - t) / tAnim);
-                Color c = Color.Lerp(Color.black, Color.white, tInter);
+                Color c = Color.Lerp(Color.red, Color.white, tInter);
                 foreach (var item in gameObject.GetComponentsInChildren<Renderer>())
                 {
                     foreach (var m in item.materials)
