@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Color_Metallic
+  m_Name: Color_Metallic 2
   m_Shader: {fileID: 4800000, guid: 81ae609a37b59f043ac4256abae11b2e, type: 3}
   m_ShaderKeywords: TCP2_BUMP TCP2_RIM TCP2_SPEC
   m_LightmapFlags: 5
@@ -36,7 +36,7 @@ Material:
     - _Shininess: 0.15077282
     - _SpecSmooth: 0.05
     m_Colors:
-    - _Color: {r: 0.09433961, g: 0.09433961, b: 0.09433961, a: 1}
+    - _Color: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 1}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
     - _LColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _RimColor: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 0.28235295}
