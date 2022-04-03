@@ -8,9 +8,12 @@ public class Monster : MonoBehaviour
     NavMeshAgent agent;
     float waitInPlaceTime = 2f;
     float t;
-
+    bool followingPlayer = false;
+    bool avoidingPlayer = false;
+    PlayerController player;
     void Start()
     {
+        player = FindObjectOfType<PlayerController>();
         agent = GetComponent<NavMeshAgent>();
         waitInPlaceTime = Random.Range(2f, 10f);
         agent.destination = transform.position;
@@ -22,6 +25,8 @@ public class Monster : MonoBehaviour
     {
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
+           
+
             if (Time.time - t > waitInPlaceTime)
             {
                 t = Mathf.Infinity;
@@ -34,14 +39,27 @@ public class Monster : MonoBehaviour
             }
 
         }
+        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        if (distanceToPlayer < 10f && !followingPlayer && !avoidingPlayer)
+        {
+            StartCoroutine(AvoidingPlayerForAWhile());
+            //if (player.GetComponent<PlayerLight>().GetPower() > 0)
+           // {
+                t = Mathf.Infinity;
+                SetNewDestination(true);
+            //}
+        }
 
 
+        if (distanceToPlayer < 1f)
+            FindObjectOfType<GameManager>().GameOver();
     }
 
-    void SetNewDestination()
+
+    void SetNewDestination(bool runFromPlayer = false)
     {
         Vector3 dest = -Vector3.one;
-        if (!FindObjectOfType<PlayerController>().IsInsideLight())
+        if (!player.IsInsideLight() && !runFromPlayer)
         {
             dest = GetValidPointAroundPlayer();
         }
@@ -75,6 +93,7 @@ public class Monster : MonoBehaviour
         if (NavMesh.SamplePosition(startPoint, out hit, 10.0f, NavMesh.AllAreas))
         {
             waitInPlaceTime = Random.Range(2f, 10f);
+            followingPlayer = false;
             return hit.position;
         }
         waitInPlaceTime = Random.Range(0.1f, 0.2f);
@@ -85,17 +104,27 @@ public class Monster : MonoBehaviour
     Vector3 GetValidPointAroundPlayer()
     {
       
-        Vector2 aroundness = Random.insideUnitCircle.normalized * Random.Range(0.25f, 0.5f);
-        Vector3 startPoint = FindObjectOfType<PlayerController>().transform.position;
+        Vector2 aroundness = Random.insideUnitCircle.normalized * 0.25f;
+        Vector3 startPoint = player.transform.position;
         startPoint.x += aroundness.x;
         startPoint.z += aroundness.y;
         NavMeshHit hit;
         if (NavMesh.SamplePosition(startPoint, out hit, 10.0f, NavMesh.AllAreas))
         {
             waitInPlaceTime = Random.Range(0.5f, 1f);
+            followingPlayer = true;
             return hit.position;
         }
         waitInPlaceTime = Random.Range(0.1f, 0.2f);
         return -Vector3.one;
+    }
+
+    IEnumerator AvoidingPlayerForAWhile()
+    {
+        avoidingPlayer = true;
+
+        yield return new WaitForSeconds(5f);
+
+        avoidingPlayer = false;
     }
 }

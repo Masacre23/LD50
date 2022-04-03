@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class Fireplace : MonoBehaviour
 {
-
+    public Gradient basicFire;
+    public Color basicMainLightColor;
+    public Color basicBlinkingLightColor;
+    public Gradient greenFire;
+    public Color greenMainLightColor;
+    public Color greenBlinkingLightColor;
     [SerializeField] private float power = 50f;
     [SerializeField] public Vector2 powerRange;
     [SerializeField] private float unPowerSpeed;
@@ -99,5 +104,54 @@ public class Fireplace : MonoBehaviour
     public float GetLightDistance()
     {
         return Mathf.Lerp(mainLightDistanceRange.x, mainLightDistanceRange.y, power / powerRange.y)*0.5f;  
+    }
+
+    public void ChangeFireColor(ItemType it)
+    {
+        var f1 = flame1.colorOverLifetime;
+        var f2 = flame2.colorOverLifetime;
+        var g = glow.colorOverLifetime;
+        var s = sparks.colorOverLifetime;
+        switch (it)
+        {
+            case ItemType.GASOIL:
+                f1.color = basicFire;
+                f2.color = basicFire;
+                g.color = basicFire;
+                s.color = basicFire;
+
+                break;
+            case ItemType.WOOD:
+                f1.color = greenFire;
+                f2.color = greenFire;
+                g.color = greenFire;
+                s.color = greenFire;
+                mainLight.color = greenMainLightColor;
+                blinkingLight.color = greenBlinkingLightColor;
+                break;
+            case ItemType.HUMAN:
+                f1.color = basicFire;
+                f2.color = basicFire;
+                g.color = basicFire;
+                s.color = basicFire;
+                break;
+            case ItemType.DEFAULT:
+                f1.color = basicFire;
+                f2.color = basicFire;
+                g.color = basicFire;
+                s.color = basicFire;                       
+                mainLight.color = basicMainLightColor;
+                blinkingLight.color = basicBlinkingLightColor;
+                break;
+            default:
+                f1.color = basicFire;
+                f2.color = basicFire;
+                g.color = basicFire;
+                s.color = basicFire;
+                mainLight.color = basicMainLightColor;
+                blinkingLight.color = basicBlinkingLightColor;
+                break;
+        }
+       
     }
 }

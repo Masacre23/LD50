@@ -9,6 +9,7 @@ public class NPC : MonoBehaviour
     float waitInPlaceTime = 2f;
     float t;
     Animator animator;
+    [SerializeField] List<GameObject> models;
 
     void Start()
     {
@@ -17,6 +18,14 @@ public class NPC : MonoBehaviour
         agent.destination = transform.position;
         agent.avoidancePriority = Random.Range(10, 99);
         t = Mathf.Infinity;
+        
+        foreach (var m in models)
+        {
+            m.SetActive(false);
+        }
+
+        models.Random().SetActive(true);
+
         animator = GetComponentInChildren<Animator>();
     }
 

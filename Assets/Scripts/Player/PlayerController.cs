@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private Item item = null;
 
     [SerializeField] SetPosition setPosOfPlaceHolder;
+    [SerializeField] List<GameObject> models;
 
     private bool actionKeyUp = true;
     void Start()
@@ -24,6 +25,13 @@ public class PlayerController : MonoBehaviour
         setPosOfPlaceHolder.enabled = true;
         setPosOfPlaceHolder.target = transform;//transform.Find("Model").GetChild(index).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0);
         characterController = GetComponent<CharacterController>();
+        foreach (var m in models)
+        {
+            m.SetActive(false);
+        }
+
+        models.Random().SetActive(true);
+
         animator = GetComponentInChildren<Animator>();
     }
 
@@ -86,7 +94,8 @@ public class PlayerController : MonoBehaviour
             actionKeyUp = true;
 
         }
-
+      //  if (Input.GetKeyDown(KeyCode.G))
+        //    FindObjectOfType<GameManager>().GameOver();
        // IsInsideLight();
 
     } 
@@ -139,6 +148,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log(fireplace.name);
             Debug.Log(fireplace.GetComponentInChildren<Fireplace>());
             fireplace.GetComponentInChildren<Fireplace>().AddPower(obj.illumination);
+            fireplace.GetComponentInChildren<Fireplace>().ChangeFireColor(obj.type);
             actionKeyUp = false;
             obj.gameObject.tag = "Untagged";
             obj.transform.parent = null;
@@ -149,7 +159,7 @@ public class PlayerController : MonoBehaviour
 
             yield return new WaitForSeconds(0.1f);
             obj.GetComponent<Collider>().enabled = true;
-
+            obj.Burned();
         }
 
 
