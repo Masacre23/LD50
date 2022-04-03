@@ -93,6 +93,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+       // Debug.Log(IsInsideLight());
         if (!Input.GetKey(KeyCode.E))
         {
             actionKeyUp = true;
