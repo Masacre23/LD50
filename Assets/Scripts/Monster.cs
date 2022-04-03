@@ -66,7 +66,11 @@ public class Monster : MonoBehaviour
         {
             dest = GetValidPointAroundPlayer();
             if(dest != -Vector3.one)
+            {
+                agent.speed = 4f;
                 Debug.DrawLine(transform.position + Vector3.up * 2f, dest + Vector3.up * 2f, Color.red, 5f);
+
+            }
 
         }
         else if (runFromPlayer)
@@ -98,6 +102,7 @@ public class Monster : MonoBehaviour
                 //    GameObject.Find("aae").transform.position = d;
                 yield return new WaitForEndOfFrame();
             }
+            agent.speed = 8f;
             Debug.DrawLine(transform.position + Vector3.up * 2f, d + Vector3.up * 2f, Color.blue, 5f);
 
             dest = d;
@@ -106,7 +111,11 @@ public class Monster : MonoBehaviour
         {
             dest = GetValidPointAroundFireplace();
             if (dest != -Vector3.one)
+            {
+                agent.speed = 2f;
                 Debug.DrawLine(transform.position + Vector3.up * 2f, dest + Vector3.up * 2f, Color.green, 5f);
+
+            }
         }
 
         if (dest != -Vector3.one)
