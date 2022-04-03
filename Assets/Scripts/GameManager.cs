@@ -18,9 +18,11 @@ public class GameManager : MonoBehaviour
     {
         get { return _worldItems; }
         set { _worldItems = value;
+            Debug.Log("ITEMS IN THE WORLD: " + _worldItems);
+
             if (_worldItems == 0)
             {
-                Debug.Log("FINAL FASE");
+                Debug.Log("FINAL PHASE");
             }
         }
     }

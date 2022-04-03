@@ -24189,8 +24189,8 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 3
     m_NumAlphaKeys: 3
-  basicMainLightColor: {r: 0, g: 0, b: 0, a: 0}
-  basicBlinkingLightColor: {r: 0, g: 0, b: 0, a: 0}
+  basicMainLightColor: {r: 1, g: 0.3882353, b: 0, a: 1}
+  basicBlinkingLightColor: {r: 1, g: 0.7254902, b: 0, a: 1}
   greenFire:
     serializedVersion: 2
     key0: {r: 0.53444123, g: 1, b: 0, a: 0}
@@ -24220,8 +24220,8 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 3
     m_NumAlphaKeys: 3
-  greenMainLightColor: {r: 0, g: 0, b: 0, a: 0}
-  greenBlinkingLightColor: {r: 0, g: 0, b: 0, a: 0}
+  greenMainLightColor: {r: 0.044869732, g: 0.6320754, b: 0, a: 1}
+  greenBlinkingLightColor: {r: 0.116711974, g: 1, b: 0, a: 1}
   power: 50
   powerRange: {x: 0, y: 100}
   unPowerSpeed: 0.5

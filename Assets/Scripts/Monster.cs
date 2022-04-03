@@ -25,7 +25,7 @@ public class Monster : MonoBehaviour
     {
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
-           
+
 
             if (Time.time - t > waitInPlaceTime)
             {
@@ -44,9 +44,9 @@ public class Monster : MonoBehaviour
         {
             StartCoroutine(AvoidingPlayerForAWhile());
             //if (player.GetComponent<PlayerLight>().GetPower() > 0)
-           // {
-                t = Mathf.Infinity;
-                SetNewDestination(true);
+            // {
+            t = Mathf.Infinity;
+            SetNewDestination(true);
             //}
         }
 
@@ -63,10 +63,20 @@ public class Monster : MonoBehaviour
         {
             dest = GetValidPointAroundPlayer();
         }
+        else if (runFromPlayer)
+        {
+            Vector3 d = -Vector3.one;
+            while (d == -Vector3.one)
+            {
+                  d = GetValidPointAroundFireplace();
+                if (Vector3.Distance(d, player.transform.position) < 30f)
+                    d = -Vector3.one;
+            }
+        }
         else
         {
-             dest = GetValidPointAroundFireplace();
-          
+            dest = GetValidPointAroundFireplace();
+
         }
 
         if (dest != -Vector3.one)
@@ -103,7 +113,7 @@ public class Monster : MonoBehaviour
 
     Vector3 GetValidPointAroundPlayer()
     {
-      
+
         Vector2 aroundness = Random.insideUnitCircle.normalized * 0.25f;
         Vector3 startPoint = player.transform.position;
         startPoint.x += aroundness.x;

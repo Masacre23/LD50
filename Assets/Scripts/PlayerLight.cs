@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerLight : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class PlayerLight : MonoBehaviour
     }
     private void Update()
     {
-      
+
 
         AddPower(-unPowerSpeed * Time.deltaTime);
     }
@@ -38,7 +39,16 @@ public class PlayerLight : MonoBehaviour
 
         spotLight.intensity = Mathf.Lerp(mainPlayerLightIntensityRange.x, mainPlayerLightIntensityRange.y, power / powerRange.y);
         spotLight.range = Mathf.Lerp(mainPlayerLightDistanceRange.x, mainPlayerLightDistanceRange.y, power / powerRange.y);
+        if ((power * 100f) / powerRange.y < 30f)
+        {
+            if (GetComponent<NavMeshObstacle>().enabled)
+                GetComponent<NavMeshObstacle>().enabled = false;
+        }
+        else if (!GetComponent<NavMeshObstacle>().enabled)
+        {
+            GetComponent<NavMeshObstacle>().enabled = true;
 
+        }
     }
 
 }
