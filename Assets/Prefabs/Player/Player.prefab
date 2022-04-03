@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 587746841109198586}
   - component: {fileID: 59915222}
   - component: {fileID: 851351165712932311}
+  - component: {fileID: 7870530098363738784}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -265,6 +266,14 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.55
+--- !u!81 &7870530098363738784
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587746841109198579}
+  m_Enabled: 1
 --- !u!95 &2233351623642726800
 Animator:
   serializedVersion: 3

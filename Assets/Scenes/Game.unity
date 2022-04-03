@@ -2117,6 +2117,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7870530098363738784, guid: 809f5edaf46e66b47ac2de40ec61516a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 587746841109198577, guid: 809f5edaf46e66b47ac2de40ec61516a, type: 3}
     - {fileID: 587746841109198582, guid: 809f5edaf46e66b47ac2de40ec61516a, type: 3}
@@ -2961,6 +2966,11 @@ PrefabInstance:
     - target: {fileID: 5649418746508064356, guid: 9bb808f1691087e43961c8f2a973778e,
         type: 3}
       propertyPath: cameraPositionRelative.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5649418746508064360, guid: 9bb808f1691087e43961c8f2a973778e,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5649418746508064361, guid: 9bb808f1691087e43961c8f2a973778e,
