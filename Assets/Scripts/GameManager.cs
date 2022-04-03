@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Image fadeGreenPanel;
     [SerializeField] Image gameOverPopup;
     [SerializeField] GameObject winGameObject;
+    [SerializeField] GameObject dialogText;
     bool alreadyEnded = false;
 
     private int _worldItems;
@@ -47,6 +48,12 @@ public class GameManager : MonoBehaviour
                 FindObjectOfType<GameManager>().WinAsync();
             }
         }
+    }
+
+    async void Start()
+    {
+        await Task.Delay(10000);
+        dialogText.SetActive(false);
     }
 
     public async void GameOver()
