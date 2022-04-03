@@ -166,6 +166,10 @@ public class NPC : MonoBehaviour
 
     IEnumerator Death()
     {
+        foreach (var audio in GameObject.Find("Screams").GetComponents<AudioSource>())
+        {
+            audio.enabled = true;
+        }
         Vector3 a = transform.position;
         a.y = 0f;
         Vector3 b = FindObjectOfType<Fireplace>().transform.position;
