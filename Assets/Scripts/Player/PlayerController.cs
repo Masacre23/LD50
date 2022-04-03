@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
 
             Vector3 p1 = transform.position + characterController.center + Vector3.up * -characterController.height * 0.5F;
             Vector3 p2 = p1 + Vector3.up * characterController.height;
-            Collider[] colliders = Physics.OverlapCapsule(p1 + transform.forward / 2f, p2 + transform.forward / 2f, 0.5f,
+            Collider[] colliders = Physics.OverlapCapsule(p1 + transform.forward / 2f, p2 + transform.forward / 2f, 1.5f,
                 LayerMask.GetMask("Items", "Fireplace"), queryTriggerInteraction: QueryTriggerInteraction.Collide).ToArray();
             if (colliders.Any(c => c.gameObject.tag == "Fire"))
             {

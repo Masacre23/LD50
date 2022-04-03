@@ -43,7 +43,7 @@ public class Item : MonoBehaviour
         //  Debug.Log(Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position));
         if (burned)
             return;
-        if (Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 5f)
+        if (Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 8f)
         {
             if (highlighting == null)
                 highlighting = StartCoroutine(Highlighting());
