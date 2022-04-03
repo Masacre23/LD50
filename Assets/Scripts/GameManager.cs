@@ -8,7 +8,9 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     private float fadeTime = 2f;
-    [SerializeField] Image fadePanel;
+    [SerializeField] Image fadeDarkPanel;
+    [SerializeField] Image fadeWhitePanel;
+    [SerializeField] Image fadeGreenPanel;
     [SerializeField] Image gameOverPopup;
     [SerializeField] GameObject winGameObject;
     bool alreadyEnded = false;
@@ -49,7 +51,7 @@ public class GameManager : MonoBehaviour
             return;
 
         alreadyEnded = true;
-        fadePanel.Fade(fadeTime);
+        fadeDarkPanel.Fade(fadeTime);
         await Task.Delay(2000);
         gameOverPopup.gameObject.SetActive(true);
         SceneManager.LoadScene(1);
@@ -61,11 +63,31 @@ public class GameManager : MonoBehaviour
             return;
 
         alreadyEnded = true;
-        fadePanel.Fade(fadeTime);
-        await Task.Delay(2000);
+        foreach (var audio in GameObject.Find("Screams").GetComponents<AudioSource>())
+        {
+            audio.loop = false;
+        }
+
+        //Fade verde
+        fadeGreenPanel.Fade(0.5f);
+        await Task.Delay(500);
+
+        //Pasamos de verde a blanco
+        fadeWhitePanel.Fade(0);
+        fadeGreenPanel.Unfade(0.5f);
+        await Task.Delay(500);
+
+        //Mostramos la escena final
         winGameObject.SetActive(true);
-        fadePanel.Unfade(fadeTime);
+        var wincanvas = winGameObject.transform.GetChild(0).gameObject;
+        wincanvas.SetActive(false);
+        fadeWhitePanel.Unfade(fadeTime);
+        await Task.Delay(2000);
+
+        //Habilitamos el texto
+        wincanvas.SetActive(true);
         await Task.Delay(10000);
+
         SceneManager.LoadScene(1);
     }
 }
