@@ -18,6 +18,7 @@ public class Item : MonoBehaviour
     private bool burned = false;
     private void Start()
     {
+        transform.rotation = Random.rotation;
         if (GetComponent<Outline>())
             GetComponent<Outline>().OutlineWidth = 0f;
         foreach (var item in GetComponentsInChildren<Outline>())
