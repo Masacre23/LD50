@@ -54,6 +54,9 @@ public class GameManager : MonoBehaviour
         if (alreadyEnded)
             return;
 
+        var player = GameObject.Find("Player");
+        player.GetComponentInChildren<Animator>().SetBool("Dying", true);
+        player.GetComponent<PlayerController>().enabled = false;
         GameObject.Find("GlobalEffects").GetComponent<AudioSource>().PlayOneShot(Resources.Load("Audios/death") as AudioClip);
         alreadyEnded = true;
         fadeDarkPanel.Fade(fadeTime);
@@ -68,6 +71,8 @@ public class GameManager : MonoBehaviour
         if (alreadyEnded)
             return;
 
+        var player = GameObject.Find("Player");
+        player.GetComponent<PlayerController>().enabled = false;
         alreadyEnded = true;
         foreach (var audio in GameObject.Find("Screams").GetComponents<AudioSource>())
         {

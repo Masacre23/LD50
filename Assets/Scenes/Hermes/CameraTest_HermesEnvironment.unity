@@ -339,7 +339,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1015393517}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
@@ -929,6 +929,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 230004172576761330, guid: 9471cf709f1161b408defb8305cb53c2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.7319927
+      objectReference: {fileID: 0}
+    - target: {fileID: 230004172576761330, guid: 9471cf709f1161b408defb8305cb53c2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.9723754
+      objectReference: {fileID: 0}
     - target: {fileID: 1956517777063878550, guid: 9471cf709f1161b408defb8305cb53c2,
         type: 3}
       propertyPath: m_Name
