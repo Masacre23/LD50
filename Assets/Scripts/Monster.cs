@@ -68,7 +68,7 @@ public class Monster : MonoBehaviour
             if(dest != -Vector3.one)
             {
                 agent.speed = 4f;
-                Debug.DrawLine(transform.position + Vector3.up * 2f, dest + Vector3.up * 2f, Color.red, 5f);
+                //Debug.DrawLine(transform.position + Vector3.up * 2f, dest + Vector3.up * 2f, Color.red, 5f);
 
             }
 
@@ -103,7 +103,7 @@ public class Monster : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
             agent.speed = 8f;
-            Debug.DrawLine(transform.position + Vector3.up * 2f, d + Vector3.up * 2f, Color.blue, 5f);
+       //     Debug.DrawLine(transform.position + Vector3.up * 2f, d + Vector3.up * 2f, Color.blue, 5f);
 
             dest = d;
         }
@@ -113,7 +113,7 @@ public class Monster : MonoBehaviour
             if (dest != -Vector3.one)
             {
                 agent.speed = 2f;
-                Debug.DrawLine(transform.position + Vector3.up * 2f, dest + Vector3.up * 2f, Color.green, 5f);
+              //  Debug.DrawLine(transform.position + Vector3.up * 2f, dest + Vector3.up * 2f, Color.green, 5f);
 
             }
         }

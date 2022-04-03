@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
         {
             item = null;
 
-            Debug.Log("DROP");
+          //  Debug.Log("DROP");
             actionKeyUp = false;
             obj.transform.parent = null;
 
