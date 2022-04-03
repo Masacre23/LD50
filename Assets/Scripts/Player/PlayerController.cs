@@ -149,6 +149,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log(fireplace.GetComponentInChildren<Fireplace>());
             fireplace.GetComponentInChildren<Fireplace>().AddPower(obj.illumination);
             fireplace.GetComponentInChildren<Fireplace>().ChangeFireColor(obj.type);
+            fireplace.GetComponentInChildren<AudioSource>().PlayOneShot(Resources.Load("Audios/throw_to_fire") as AudioClip);
             actionKeyUp = false;
             obj.gameObject.tag = "Untagged";
             obj.transform.parent = null;
