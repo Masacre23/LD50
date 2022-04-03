@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+
 public class PlayerController : MonoBehaviour
 {
     public float lanternAngle;
@@ -44,9 +45,9 @@ public class PlayerController : MonoBehaviour
             //transform.rotation = Quaternion.Lerp(Quaternion.LookRotation(movement), transform.rotation, 0.45f);
 
             Quaternion q = transform.rotation;
-            q = Quaternion.Lerp(Quaternion.LookRotation(Camera.main.transform.TransformDirection(movement)), transform.rotation, 0.45f);                    
+            q = Quaternion.Lerp(Quaternion.LookRotation(Camera.main.transform.TransformDirection(movement)), transform.rotation, 0.45f);
             transform.rotation = Quaternion.Euler(0, q.eulerAngles.y, 0);
-            
+
             Vector3 camForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
             movement = Input.GetAxis("Vertical") * camForward + Input.GetAxis("Horizontal") * Camera.main.transform.right;
 
@@ -63,17 +64,17 @@ public class PlayerController : MonoBehaviour
         characterController.Move(Vector3.down * 20f * Time.deltaTime);
         if (Input.GetKey(KeyCode.E) && actionKeyUp)
         {
-         
+
 
             Vector3 p1 = transform.position + characterController.center + Vector3.up * -characterController.height * 0.5F;
             Vector3 p2 = p1 + Vector3.up * characterController.height;
-            Collider[] colliders = Physics.OverlapCapsule(p1 + transform.forward / 2f, p2 + transform.forward / 2f, 0.5f, 
+            Collider[] colliders = Physics.OverlapCapsule(p1 + transform.forward / 2f, p2 + transform.forward / 2f, 0.5f,
                 LayerMask.GetMask("Items", "Fireplace"), queryTriggerInteraction: QueryTriggerInteraction.Collide).ToArray();
             if (colliders.Any(c => c.gameObject.tag == "Fire"))
             {
                 GetComponent<PlayerLight>().SetPower(Mathf.Infinity);
                 if (item != null)
-                StartCoroutine(DropItemInFire(item, colliders.Where(c => c.gameObject.tag == "Fire").First().transform));
+                    StartCoroutine(DropItemInFire(item, colliders.Where(c => c.gameObject.tag == "Fire").First().transform));
 
             }
             else
@@ -86,7 +87,9 @@ public class PlayerController : MonoBehaviour
                     PickItem(colliders.Where(c => c.gameObject.tag == "Item").First().gameObject);
             }
         }
-      
+
+
+
     }
     private void Update()
     {
@@ -95,41 +98,42 @@ public class PlayerController : MonoBehaviour
             actionKeyUp = true;
 
         }
-      //  if (Input.GetKeyDown(KeyCode.G))
+        //  if (Input.GetKeyDown(KeyCode.G))
         //    FindObjectOfType<GameManager>().GameOver();
-       // IsInsideLight();
+        // IsInsideLight();
 
-    } 
+    }
 
     void PickItem(GameObject g)
     {
-      
-       // Debug.Log("PickItem");
+
+        // Debug.Log("PickItem");
+        item = g.GetComponentInChildren<Item>();
 
         actionKeyUp = false;
-        g.transform.parent = GetComponentInChildren<SetPosition>().transform;
+        g.transform.parent = DeepHierarchySearch.SearchAll(models.First(z => z.activeInHierarchy), "mixamorig:RightHand").transform;
+        g.transform.localRotation = Quaternion.LookRotation(item.rotationReference);
         g.transform.localPosition = Vector3.zero;
-        g.transform.localEulerAngles = Vector3.zero;
+        //g.transform.localEulerAngles = Vector3.zero;
         g.GetComponent<Rigidbody>().isKinematic = true;
         g.GetComponent<Collider>().enabled = false;
-        item = g.GetComponentInChildren<Item>();
     }
 
 
     IEnumerator DropItem(Item obj)
     {
-        if (item!= null)
+        if (item != null)
         {
             item = null;
 
             Debug.Log("DROP");
             actionKeyUp = false;
-
-            obj.transform.localPosition += Vector3.up * 2f;
             obj.transform.parent = null;
+
+            obj.transform.position += Vector3.up * 2f;
             obj.GetComponent<Rigidbody>().isKinematic = false;
-            obj.GetComponent<Rigidbody>().AddExplosionForce(5f, obj.transform.position - Vector3.up+ Random.insideUnitSphere, 5f);
-            obj.GetComponent<Rigidbody>().AddTorque(new Vector3(2f,2f,2f)+Random.insideUnitSphere*3f, ForceMode.Impulse);
+            obj.GetComponent<Rigidbody>().AddExplosionForce(5f, obj.transform.position - Vector3.up + Random.insideUnitSphere, 5f);
+            obj.GetComponent<Rigidbody>().AddTorque(new Vector3(2f, 2f, 2f) + Random.insideUnitSphere * 3f, ForceMode.Impulse);
 
             yield return new WaitForSeconds(0.1f);
             obj.GetComponent<Collider>().enabled = true;
@@ -145,9 +149,9 @@ public class PlayerController : MonoBehaviour
         {
             item = null;
 
-          //  Debug.Log("DROP IN FIRE");
-          //  Debug.Log(fireplace.name);
-          //  Debug.Log(fireplace.GetComponentInChildren<Fireplace>());
+            //  Debug.Log("DROP IN FIRE");
+            //  Debug.Log(fireplace.name);
+            //  Debug.Log(fireplace.GetComponentInChildren<Fireplace>());
             fireplace.GetComponentInChildren<Fireplace>().AddPower(obj.illumination);
             fireplace.GetComponentInChildren<Fireplace>().ChangeFireColor(obj.type);
             fireplace.GetComponentInChildren<AudioSource>().PlayOneShot(Resources.Load("Audios/throw_to_fire") as AudioClip);
@@ -168,10 +172,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
-   public bool IsInsideLight()
+    public bool IsInsideLight()
     {
-      //  Debug.Log(Vector3.Distance(transform.position, FindObjectOfType<Fireplace>().transform.position) + "  <  " +
-      //      FindObjectOfType<Fireplace>().GetLightDistance());
+        //  Debug.Log(Vector3.Distance(transform.position, FindObjectOfType<Fireplace>().transform.position) + "  <  " +
+        //      FindObjectOfType<Fireplace>().GetLightDistance());
 
         return (Vector3.Distance(transform.position, FindObjectOfType<Fireplace>().transform.position) <
             FindObjectOfType<Fireplace>().GetLightDistance() || FindObjectOfType<PlayerLight>().GetPower() > 0f);

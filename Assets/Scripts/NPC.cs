@@ -206,7 +206,7 @@ public class NPC : MonoBehaviour
 
 
         //    Debug.Log("MUERO");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         FindObjectOfType<Fireplace>().GetComponentInChildren<Fireplace>().AddPower(7f);
         FindObjectOfType<Fireplace>().GetComponentInChildren<Fireplace>().ChangeFireColor(ItemType.HUMAN);
         FindObjectOfType<GameManager>().worldNPCs--;
