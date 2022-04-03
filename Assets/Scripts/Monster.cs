@@ -102,7 +102,7 @@ public class Monster : MonoBehaviour
                 //    GameObject.Find("aae").transform.position = d;
                 yield return new WaitForEndOfFrame();
             }
-            agent.speed = 5f;
+            agent.speed = 8f;
             Debug.DrawLine(transform.position + Vector3.up * 2f, d + Vector3.up * 2f, Color.blue, 5f);
 
             dest = d;
