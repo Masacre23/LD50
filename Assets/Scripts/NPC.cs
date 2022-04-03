@@ -15,8 +15,10 @@ public class NPC : MonoBehaviour
     float minDistanceToFireplace = 3f;
     bool waitingToDie = false;
     bool dead = false;
+    System.DateTime startMoment;
     void Start()
     {
+        startMoment = System.DateTime.Now;
         FindObjectOfType<GameManager>().worldNPCs++;
         agent = GetComponent<NavMeshAgent>();
         waitInPlaceTime = Random.Range(2f, 10f);
@@ -37,7 +39,7 @@ public class NPC : MonoBehaviour
     void Update()
     {
         if (agent.enabled)
-            if (FindObjectOfType<GameManager>().worldItems>0)
+            if (FindObjectOfType<GameManager>().worldItems>0 || (System.DateTime.Now-startMoment).TotalSeconds > 180f)
             {
 
                 if (agent.remainingDistance <= agent.stoppingDistance)
@@ -70,7 +72,7 @@ public class NPC : MonoBehaviour
                     }
                     else if (!GetComponent<NavMeshObstacle>().enabled && !goingToFinalPosition && !waitingToDie)
                     {
-                        Debug.Log("PARO");
+                     //   Debug.Log("PARO");
                         GetComponent<NavMeshAgent>().enabled = false;
                         GetComponent<NavMeshObstacle>().enabled = true;
                         waitingToDie = true;
@@ -91,6 +93,14 @@ public class NPC : MonoBehaviour
             }
         }
 
+
+        if (Vector3.Distance(FindObjectOfType<Fireplace>().transform.position, transform.position) < 3f &&
+           (Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 1f) && !dead)
+        {
+            dead = true;
+            StartCoroutine(Death());
+
+        }
     }
 
     private void LateUpdate()
@@ -163,9 +173,12 @@ public class NPC : MonoBehaviour
         goingToFinalPosition = false;
     }
 
-
     IEnumerator Death()
     {
+
+        GetComponent<NavMeshAgent>().enabled = false;
+        GetComponent<NavMeshObstacle>().enabled = false;
+        //Destroy(GetComponent<NavMeshObstacle>());
         foreach (var audio in GameObject.Find("Screams").GetComponents<AudioSource>())
         {
             audio.enabled = true;
@@ -191,8 +204,12 @@ public class NPC : MonoBehaviour
 
 
     //    Debug.Log("MUERO");
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1f);
+        FindObjectOfType<Fireplace>().GetComponentInChildren<Fireplace>().AddPower(7f);
+        FindObjectOfType<Fireplace>().GetComponentInChildren<Fireplace>().ChangeFireColor(ItemType.HUMAN);
         FindObjectOfType<GameManager>().worldNPCs--;
+
+        yield return new WaitForSeconds(2.5f);
 
         Destroy(gameObject);
 

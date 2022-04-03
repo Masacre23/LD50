@@ -124,7 +124,7 @@ public class Monster : MonoBehaviour
               FindObjectOfType<Fireplace>().mainLightDistanceRange.y / 5f,
               FindObjectOfType<Fireplace>().GetPower() / FindObjectOfType<Fireplace>().powerRange.y);     */
         // Debug.Log(maxDistance);
-        float maxMaxDistance = Random.Range(FindObjectOfType<Fireplace>().GetLightDistance() * 3f, 75f);
+        float maxMaxDistance = Random.Range(FindObjectOfType<Fireplace>().GetLightDistance(true), 75f);
         // Debug.Log(FindObjectOfType<Fireplace>().GetLightDistance());
         Vector2 aroundness = Random.insideUnitCircle.normalized * maxMaxDistance;
         Vector3 startPoint = FindObjectOfType<Fireplace>().transform.position;
