@@ -14,4 +14,18 @@ public class Item : MonoBehaviour
 {
     public float illumination = 0f;
     public ItemType type;
+
+    private void Start()
+    {
+        FindObjectOfType<GameManager>().worldItems++;
+    }
+
+
+    public void Burned()
+    {
+        FindObjectOfType<GameManager>().worldItems--;
+        Destroy(gameObject, 5f);
+    }
+
+    
 }

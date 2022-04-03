@@ -12,6 +12,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] Image gameOverPopup;
     [SerializeField] GameObject winGameObject;
     bool alreadyEnded = false;
+
+    private int _worldItems;
+    public int worldItems
+    {
+        get { return _worldItems; }
+        set { _worldItems = value;
+            if (_worldItems == 0)
+            {
+                Debug.Log("FINAL FASE");
+            }
+        }
+    }
+
     public async void GameOver()
     {
         if (alreadyEnded)

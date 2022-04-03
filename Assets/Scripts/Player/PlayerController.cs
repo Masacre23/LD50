@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour
 
             yield return new WaitForSeconds(0.1f);
             obj.GetComponent<Collider>().enabled = true;
-
+            obj.Burned();
         }
 
 
