@@ -69,7 +69,7 @@ public class MainMenuManager : MonoBehaviour
         if (counter > 75f)
         {
             counter = 0;
-            splineController.FollowSpline();
+            //splineController.FollowSpline();
         }
 
         if (waitAnyKey)
