@@ -15,7 +15,7 @@ public class Monster : MonoBehaviour
     {
         player = FindObjectOfType<PlayerController>();
         agent = GetComponent<NavMeshAgent>();
-        waitInPlaceTime = Random.Range(2f, 10f);
+        waitInPlaceTime = Random.Range(1f, 2);
         agent.destination = transform.position;
         agent.avoidancePriority = Random.Range(10, 99);
         t = Mathf.Infinity;
@@ -40,7 +40,11 @@ public class Monster : MonoBehaviour
 
         }
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-        if (distanceToPlayer < 10f && !followingPlayer && !avoidingPlayer)
+     //  Vector3 localPos = player.transform.TransformPoint(transform.position);
+     //   Debug.Log();
+        if (distanceToPlayer < 5f && 
+            Vector3.Angle(player.transform.forward, transform.position - player.transform.position) < 25f &&
+            !followingPlayer && !avoidingPlayer )
         {
             StartCoroutine(AvoidingPlayerForAWhile());
             //if (player.GetComponent<PlayerLight>().GetPower() > 0)
@@ -89,12 +93,13 @@ public class Monster : MonoBehaviour
 
     Vector3 GetValidPointAroundFireplace()
     {
-        float minDistance = Mathf.Lerp(1, 10, FindObjectOfType<Fireplace>().GetPower() / FindObjectOfType<Fireplace>().powerRange.y);
+      /*  float minDistance = Mathf.Lerp(1, 10, FindObjectOfType<Fireplace>().GetPower() / FindObjectOfType<Fireplace>().powerRange.y);
         float maxDistance = Mathf.Lerp(minDistance,
             FindObjectOfType<Fireplace>().mainLightDistanceRange.y / 5f,
-            FindObjectOfType<Fireplace>().GetPower() / FindObjectOfType<Fireplace>().powerRange.y);
+            FindObjectOfType<Fireplace>().GetPower() / FindObjectOfType<Fireplace>().powerRange.y);     */
         // Debug.Log(maxDistance);
-        float maxMaxDistance = Random.Range(maxDistance, 100f);
+        float maxMaxDistance = Random.Range(FindObjectOfType<Fireplace>().GetLightDistance()*3f, 75f);
+       // Debug.Log(FindObjectOfType<Fireplace>().GetLightDistance());
         Vector2 aroundness = Random.insideUnitCircle.normalized * maxMaxDistance;
         Vector3 startPoint = FindObjectOfType<Fireplace>().transform.position;
         startPoint.x += aroundness.x;

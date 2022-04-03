@@ -27,6 +27,7 @@ public class PlayerLight : MonoBehaviour
 
     public float GetPower()
     {
+        return 0;
         return power;
     }
     public void SetPower(float newPower)
@@ -35,11 +36,12 @@ public class PlayerLight : MonoBehaviour
     }
     public void AddPower(float n)
     {
+        return;
         power = Mathf.Clamp(power + n, powerRange.x, powerRange.y);
 
         spotLight.intensity = Mathf.Lerp(mainPlayerLightIntensityRange.x, mainPlayerLightIntensityRange.y, power / powerRange.y);
         spotLight.range = Mathf.Lerp(mainPlayerLightDistanceRange.x, mainPlayerLightDistanceRange.y, power / powerRange.y);
-        if ((power * 100f) / powerRange.y < 30f)
+      /*  if ((power * 100f) / powerRange.y < 30f)
         {
             if (GetComponent<NavMeshObstacle>().enabled)
                 GetComponent<NavMeshObstacle>().enabled = false;
@@ -48,7 +50,7 @@ public class PlayerLight : MonoBehaviour
         {
             GetComponent<NavMeshObstacle>().enabled = true;
 
-        }
+        }     */
     }
 
 }

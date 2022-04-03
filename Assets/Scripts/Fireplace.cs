@@ -103,7 +103,7 @@ public class Fireplace : MonoBehaviour
 
     public float GetLightDistance()
     {
-        return Mathf.Lerp(mainLightDistanceRange.x, mainLightDistanceRange.y, power / powerRange.y)*0.5f;  
+        return Mathf.Lerp(mainLightDistanceRange.x, mainLightDistanceRange.y, power / powerRange.y)*0.35f;  
     }
 
     public void ChangeFireColor(ItemType it)
@@ -154,4 +154,17 @@ public class Fireplace : MonoBehaviour
         }
        
     }
+
+    void OnDrawGizmos()
+    {
+        // Draw a yellow sphere at the transform's position
+        Gizmos.color = Color.yellow;
+        //Debug.Log(GetLightDistance());
+        Gizmos.DrawWireSphere(transform.position, GetLightDistance());
+
+        Gizmos.color = Color.red;
+
+        Gizmos.DrawWireSphere(transform.position, GetLightDistance()*3f);
+    }
+
 }

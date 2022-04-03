@@ -112,7 +112,8 @@ public class NPC : MonoBehaviour
     {
         float minDistance = Mathf.Lerp(1, 10, FindObjectOfType<Fireplace>().GetPower() / FindObjectOfType<Fireplace>().powerRange.y);
         float maxDistance = Random.Range(minDistance,
-            FindObjectOfType<Fireplace>().mainLightDistanceRange.y / 5f);
+           FindObjectOfType<Fireplace>().GetLightDistance());
+
         if (FindObjectOfType<Fireplace>().GetPower() < 20f || final)
         {
             maxDistance = 2f;
@@ -135,11 +136,11 @@ public class NPC : MonoBehaviour
 
     IEnumerator SetFinalDestination()
     {
-        Debug.Log("SET FINAL DESTINRAION");
+      //  Debug.Log("SET FINAL DESTINRAION");
         Vector3 d = -Vector3.one;
         while (d == -Vector3.one)
         {
-            Debug.Log("NEW TRY");
+          //  Debug.Log("NEW TRY");
             d = GetValidPointAroundFireplace(true);
             if (Vector3.Distance(d, FindObjectOfType<Fireplace>().transform.position) > minDistanceToFireplace)
                 d = -Vector3.one;
@@ -157,7 +158,7 @@ public class NPC : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        Debug.Log("VALID");
+    //    Debug.Log("VALID");
         yield return new WaitForSeconds(1f);
         goingToFinalPosition = false;
     }
@@ -185,7 +186,7 @@ public class NPC : MonoBehaviour
         }
 
 
-        Debug.Log("MUERO");
+    //    Debug.Log("MUERO");
         yield return new WaitForSeconds(5f);
         FindObjectOfType<GameManager>().worldNPCs--;
 
