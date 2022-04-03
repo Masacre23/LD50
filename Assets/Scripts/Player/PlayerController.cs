@@ -178,7 +178,7 @@ public class PlayerController : MonoBehaviour
         //      FindObjectOfType<Fireplace>().GetLightDistance());
 
         return (Vector3.Distance(transform.position, FindObjectOfType<Fireplace>().transform.position) <
-            FindObjectOfType<Fireplace>().GetLightDistance() || FindObjectOfType<PlayerLight>().GetPower() > 0f);
+            FindObjectOfType<Fireplace>().GetLightDistance(true) );
 
     }
 }
