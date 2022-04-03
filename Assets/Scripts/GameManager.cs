@@ -50,10 +50,12 @@ public class GameManager : MonoBehaviour
         if (alreadyEnded)
             return;
 
+        GameObject.Find("GlobalEffects").GetComponent<AudioSource>().PlayOneShot(Resources.Load("Audios/death") as AudioClip);
         alreadyEnded = true;
         fadeDarkPanel.Fade(fadeTime);
         await Task.Delay(2000);
         gameOverPopup.gameObject.SetActive(true);
+        await Task.Delay(5000);
         SceneManager.LoadScene(1);
     }
 
