@@ -18,6 +18,8 @@ public class Item : MonoBehaviour
     private bool burned = false;
     private void Start()
     {
+        GetComponent<Outline>().OutlineWidth = 0f;
+
         FindObjectOfType<GameManager>().worldItems++;
     }
 
@@ -25,15 +27,8 @@ public class Item : MonoBehaviour
     public void Burned()
     {
         burned = true;
-        foreach (var item in gameObject.GetComponentsInChildren<Renderer>())
-        {
-            foreach (var m in item.materials)
-            {
-                m.SetColor("_HColor", Color.red);
+        GetComponent<Outline>().OutlineWidth = 0f;
 
-            }
-
-        }
         FindObjectOfType<GameManager>().worldItems--;
         Destroy(gameObject, 5f);
     }
@@ -50,15 +45,8 @@ public class Item : MonoBehaviour
         }
         else if (highlighting != null)
         {
-            foreach (var item in gameObject.GetComponentsInChildren<Renderer>())
-            {
-                foreach (var m in item.materials)
-                {
-                    m.SetColor("_HColor", Color.white);
+            GetComponent<Outline>().OutlineWidth = 0f;
 
-                }
-
-            }
 
             StopCoroutine(highlighting);
             highlighting = null;
@@ -78,16 +66,8 @@ public class Item : MonoBehaviour
             while (Time.time - t < tAnim && !burned)
             {
                 tInter = (Time.time - t) / tAnim;
-                Color c = Color.Lerp(Color.white, Color.red, tInter);
-                foreach (var item in gameObject.GetComponentsInChildren<Renderer>())
-                {
-                    foreach (var m in item.materials)
-                    {
-                        m.SetColor("_HColor", c);
-
-                    }
-
-                }
+                
+                GetComponent<Outline>().OutlineWidth = tInter * 2f;
                 yield return new WaitForFixedUpdate();
             }
 
@@ -95,17 +75,11 @@ public class Item : MonoBehaviour
             tInter = 0;
             while (Time.time - t < tAnim && !burned)
             {
-                tInter =((Time.time - t) / tAnim);
-                Color c = Color.Lerp(Color.red, Color.white, tInter);
-                foreach (var item in gameObject.GetComponentsInChildren<Renderer>())
-                {
-                    foreach (var m in item.materials)
-                    {
-                        m.SetColor("_HColor", c);
+                tInter =1-((Time.time - t) / tAnim);
+            
 
-                    }
+                GetComponent<Outline>().OutlineWidth = tInter * 2f;
 
-                }
                 yield return new WaitForFixedUpdate();
             }
         }
