@@ -73,7 +73,10 @@ public class GameManager : MonoBehaviour
         //Fade verde
         fadeGreenPanel.Fade(0.5f);
         await Task.Delay(500);
-
+        foreach(var monster in GameObject.FindGameObjectsWithTag("Monster"))
+        {
+            monster.SetActive(false);
+        }
         //Pasamos de verde a blanco
         fadeWhitePanel.Fade(0);
         fadeGreenPanel.Unfade(0.5f);

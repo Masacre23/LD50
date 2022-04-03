@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Item
   - Fire
+  - Monster
   layers:
   - Default
   - TransparentFX
