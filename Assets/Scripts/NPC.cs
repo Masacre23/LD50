@@ -7,15 +7,17 @@ public class NPC : MonoBehaviour
 
     NavMeshAgent agent;
     float waitInPlaceTime = 2f;
-    float waitInPlaceTimeEnd = 0;
     float t;
     Animator animator;
     [SerializeField] List<GameObject> models;
+    bool gameToEnd = false;
     bool goingToFinalPosition = true;
     float minDistanceToFireplace = 3f;
     bool waitingToDie = false;
+    bool dead = false;
     void Start()
     {
+        FindObjectOfType<GameManager>().worldNPCs++;
         agent = GetComponent<NavMeshAgent>();
         waitInPlaceTime = Random.Range(2f, 10f);
         agent.destination = transform.position;
@@ -57,18 +59,16 @@ public class NPC : MonoBehaviour
             else
             {
 
-
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {
-
-                    if (Time.time - t > waitInPlaceTimeEnd )
+                    if (!gameToEnd )
                     {
+                        gameToEnd =true;
                        // goingToFinalPosition = true;
-                        t = Mathf.Infinity;
                         StartCoroutine(SetFinalDestination());
 
                     }
-                    else if (t == Mathf.Infinity && !GetComponent<NavMeshObstacle>().enabled && !goingToFinalPosition)
+                    else if (!GetComponent<NavMeshObstacle>().enabled && !goingToFinalPosition && !waitingToDie)
                     {
                         Debug.Log("PARO");
                         GetComponent<NavMeshAgent>().enabled = false;
@@ -81,20 +81,18 @@ public class NPC : MonoBehaviour
 
 
             }
-        else if (waitingToDie)
+        else if (waitingToDie && !dead)
         {
-            if (Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 0.5f)
+            if (Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 1f)
             {
-                Debug.Log("MUERO");
+                dead = true;
+                StartCoroutine(Death());
+               
             }
         }
 
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log(collision.gameObject.name);
-    }
     private void LateUpdate()
     {
         animator.SetFloat("Speed", agent.velocity.magnitude);
@@ -158,10 +156,40 @@ public class NPC : MonoBehaviour
 
             yield return new WaitForEndOfFrame();
         }
-        waitInPlaceTimeEnd = Mathf.Infinity;
 
         Debug.Log("VALID");
         yield return new WaitForSeconds(1f);
         goingToFinalPosition = false;
+    }
+
+
+    IEnumerator Death()
+    {
+        Vector3 a = transform.position;
+        a.y = 0f;
+        Vector3 b = FindObjectOfType<Fireplace>().transform.position;
+        b.y = 0f;
+
+        transform.rotation = Quaternion.LookRotation(a - b);
+        animator.SetTrigger("Dying");
+        float t = Time.time;
+        float tInter = 0;
+        float tAnim = 1f;
+        a = transform.position;
+        b.y = transform.position.y;
+        while (Time.time - t < tAnim)
+        {
+            tInter = (Time.time - t) / tAnim;
+            transform.position = Vector3.Lerp(a, b, tInter);
+            yield return new WaitForFixedUpdate();
+        }
+
+
+        Debug.Log("MUERO");
+        yield return new WaitForSeconds(5f);
+        FindObjectOfType<GameManager>().worldNPCs--;
+
+        Destroy(gameObject);
+
     }
 }

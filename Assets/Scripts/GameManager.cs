@@ -26,6 +26,22 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    private int _worldNPCs;
+    public int worldNPCs
+    {
+        get { return _worldNPCs; }
+        set
+        {
+            _worldNPCs = value;
+            Debug.Log("NPCS IN THE WORLD: " + _worldNPCs);
+
+            if (_worldNPCs == 0)
+            {
+                Debug.Log("GAME OVER");
+                FindObjectOfType<GameManager>().WinAsync();
+            }
+        }
+    }
 
     public async void GameOver()
     {
