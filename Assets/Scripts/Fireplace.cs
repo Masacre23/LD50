@@ -6,10 +6,8 @@ public class Fireplace : MonoBehaviour
 {
     public Gradient basicFire;
     public Color basicMainLightColor;
-    public Color basicBlinkingLightColor;
     public Gradient greenFire;
     public Color greenMainLightColor;
-    public Color greenBlinkingLightColor;
     [SerializeField] private float power;
     [SerializeField] public Vector2 powerRange;
     [SerializeField] private float unPowerSpeed;
@@ -68,7 +66,7 @@ public class Fireplace : MonoBehaviour
         power = Mathf.Clamp(power + n, powerRange.x, powerRange.y);
 
         mainLight.intensity = Mathf.Lerp(mainLightIntensityRange.x, mainLightIntensityRange.y, power / powerRange.y);
-        mainLight.range = Mathf.Lerp(mainLightDistanceRange.x, mainLightDistanceRange.y, power / powerRange.y);
+        mainLight.spotAngle = Mathf.Lerp(mainLightDistanceRange.x, mainLightDistanceRange.y, power / powerRange.y);
         blinkingLight.range = Mathf.Lerp(blinkingLightDistanceRange.x, blinkingLightDistanceRange.y, power / powerRange.y);
 
         var sh1 = flame1.shape;
@@ -105,7 +103,7 @@ public class Fireplace : MonoBehaviour
     {
         float factor = 0.35f;
         if (forMonsters)
-            factor *= 2.5f;
+            factor *= 1.75f;
         return Mathf.Lerp(mainLightDistanceRange.x, mainLightDistanceRange.y, power / powerRange.y) * factor;
     }
 
@@ -117,49 +115,61 @@ public class Fireplace : MonoBehaviour
         var s = sparks.colorOverLifetime;
         switch (it)
         {
-            case ItemType.GASOIL:
-                f1.color = basicFire;
-                f2.color = basicFire;
-                g.color = basicFire;
-                s.color = basicFire;
 
-                break;
+
             case ItemType.WOOD:
                 f1.color = basicFire;
                 f2.color = basicFire;
                 g.color = basicFire;
                 s.color = basicFire;
-                mainLight.color = basicMainLightColor;
-                blinkingLight.color = basicBlinkingLightColor;
+                StartCoroutine(ChangingColor(basicMainLightColor));
+
                 break;
             case ItemType.HUMAN:
                 f1.color = greenFire;
                 f2.color = greenFire;
                 g.color = greenFire;
                 s.color = greenFire;
-                mainLight.color = greenMainLightColor;
-                blinkingLight.color = greenBlinkingLightColor;  
+                StartCoroutine(ChangingColor(greenMainLightColor));
+
                 break;
             case ItemType.DEFAULT:
                 f1.color = basicFire;
                 f2.color = basicFire;
                 g.color = basicFire;
                 s.color = basicFire;
-                mainLight.color = basicMainLightColor;
-                blinkingLight.color = basicBlinkingLightColor;
+                StartCoroutine(ChangingColor(basicMainLightColor));
+
                 break;
             default:
                 f1.color = basicFire;
                 f2.color = basicFire;
                 g.color = basicFire;
                 s.color = basicFire;
-                mainLight.color = basicMainLightColor;
-                blinkingLight.color = basicBlinkingLightColor;
+                StartCoroutine(ChangingColor(basicMainLightColor));
+
                 break;
         }
-
     }
 
+
+    IEnumerator ChangingColor(Color newColor)
+    {
+        float t = Time.time;
+        float tInter = 0;
+        float tAnim = 1f;
+        Color ini = mainLight.color;
+        while (Time.time - t < tAnim)
+        {
+            tInter = (Time.time - t) / tAnim;
+            Color c = Color.Lerp(ini, newColor, tInter);
+            mainLight.color = c;
+            blinkingLight.color = c;
+            yield return new WaitForFixedUpdate();
+        }
+
+       
+    }
     void OnDrawGizmos()
     {
         // Draw a yellow sphere at the transform's position

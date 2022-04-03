@@ -67,7 +67,7 @@ public class Item : MonoBehaviour
             {
                 tInter = (Time.time - t) / tAnim;
                 
-                GetComponent<Outline>().OutlineWidth = tInter * 2f;
+                GetComponent<Outline>().OutlineWidth = tInter * 3f;
                 yield return new WaitForFixedUpdate();
             }
 
@@ -78,7 +78,7 @@ public class Item : MonoBehaviour
                 tInter =1-((Time.time - t) / tAnim);
             
 
-                GetComponent<Outline>().OutlineWidth = tInter * 2f;
+                GetComponent<Outline>().OutlineWidth = tInter *3f;
 
                 yield return new WaitForFixedUpdate();
             }
