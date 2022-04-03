@@ -30,6 +30,7 @@ public class Item : MonoBehaviour
 
     public void Burned()
     {
+        GetComponent<Collider>().enabled = false;
         burned = true;
         if (GetComponent<Outline>())
             GetComponent<Outline>().OutlineWidth = 0f;
