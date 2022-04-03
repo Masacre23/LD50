@@ -19,13 +19,13 @@ public class GameManager : MonoBehaviour
     public int worldItems
     {
         get { return _worldItems; }
-        set { _worldItems = value;
-            Debug.Log("ITEMS IN THE WORLD: " + _worldItems);
+        set
+        {
+            if (value < _worldItems)
+                Debug.Log("ITEMS IN THE WORLD: " + _worldItems);
 
-            if (_worldItems == 0)
-            {
-                Debug.Log("FINAL PHASE");
-            }
+            _worldItems = value;
+
         }
     }
     private int _worldNPCs;
@@ -34,8 +34,12 @@ public class GameManager : MonoBehaviour
         get { return _worldNPCs; }
         set
         {
+            if (value < _worldNPCs)
+            {
+                Debug.Log("NPCS IN THE WORLD: " + _worldNPCs);
+
+            }
             _worldNPCs = value;
-            Debug.Log("NPCS IN THE WORLD: " + _worldNPCs);
 
             if (_worldNPCs == 0)
             {
@@ -73,7 +77,7 @@ public class GameManager : MonoBehaviour
         //Fade verde
         fadeGreenPanel.Fade(0.5f);
         await Task.Delay(500);
-        foreach(var monster in GameObject.FindGameObjectsWithTag("Monster"))
+        foreach (var monster in GameObject.FindGameObjectsWithTag("Monster"))
         {
             monster.SetActive(false);
         }

@@ -105,7 +105,7 @@ public class Fireplace : MonoBehaviour
     {
         float factor = 0.35f;
         if (forMonsters)
-            factor *= 2f;
+            factor *= 2.5f;
         return Mathf.Lerp(mainLightDistanceRange.x, mainLightDistanceRange.y, power / powerRange.y) * factor;
     }
 
