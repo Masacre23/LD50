@@ -43,7 +43,7 @@ public class Monster : MonoBehaviour
         //  Vector3 localPos = player.transform.TransformPoint(transform.position);
         //   Debug.Log();
         if (distanceToPlayer < 5f &&
-            Vector3.Angle(player.transform.forward, transform.position - player.transform.position) < 25f 
+            Vector3.Angle(player.transform.forward, transform.position - player.transform.position) < player.lanternAngle 
             && !avoidingPlayer)
         {
             StartCoroutine(AvoidingPlayerForAWhile());

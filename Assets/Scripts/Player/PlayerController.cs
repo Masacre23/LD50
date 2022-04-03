@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 public class PlayerController : MonoBehaviour
 {
+    public float lanternAngle;
     CharacterController characterController;
     public float speed = 6.0f;
     public float maxSpeed = 6.0f;
