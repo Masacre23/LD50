@@ -39,7 +39,7 @@ public class NPC : MonoBehaviour
     void Update()
     {
         if (agent.enabled)
-            if (FindObjectOfType<GameManager>().worldItems>0 || (System.DateTime.Now-startMoment).TotalSeconds > 180f)
+            if (FindObjectOfType<GameManager>().worldItems > 0 || (System.DateTime.Now - startMoment).TotalSeconds > 180f)
             {
 
                 if (agent.remainingDistance <= agent.stoppingDistance)
@@ -63,16 +63,16 @@ public class NPC : MonoBehaviour
 
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {
-                    if (!gameToEnd )
+                    if (!gameToEnd)
                     {
-                        gameToEnd =true;
-                       // goingToFinalPosition = true;
+                        gameToEnd = true;
+                        // goingToFinalPosition = true;
                         StartCoroutine(SetFinalDestination());
 
                     }
                     else if (!GetComponent<NavMeshObstacle>().enabled && !goingToFinalPosition && !waitingToDie)
                     {
-                     //   Debug.Log("PARO");
+                        //   Debug.Log("PARO");
                         GetComponent<NavMeshAgent>().enabled = false;
                         GetComponent<NavMeshObstacle>().enabled = true;
                         waitingToDie = true;
@@ -89,7 +89,7 @@ public class NPC : MonoBehaviour
             {
                 dead = true;
                 StartCoroutine(Death());
-               
+
             }
         }
 
@@ -146,11 +146,11 @@ public class NPC : MonoBehaviour
 
     IEnumerator SetFinalDestination()
     {
-      //  Debug.Log("SET FINAL DESTINRAION");
+        //  Debug.Log("SET FINAL DESTINRAION");
         Vector3 d = -Vector3.one;
         while (d == -Vector3.one)
         {
-          //  Debug.Log("NEW TRY");
+            //  Debug.Log("NEW TRY");
             d = GetValidPointAroundFireplace(true);
             if (Vector3.Distance(d, FindObjectOfType<Fireplace>().transform.position) > minDistanceToFireplace)
                 d = -Vector3.one;
@@ -159,7 +159,7 @@ public class NPC : MonoBehaviour
                 NavMeshHit hit;
                 if (NavMesh.SamplePosition(d, out hit, 5f, NavMesh.AllAreas))
                 {
-                   
+
                     d = hit.position;
                     agent.SetDestination(d);
                 }
@@ -168,7 +168,7 @@ public class NPC : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-    //    Debug.Log("VALID");
+        //    Debug.Log("VALID");
         yield return new WaitForSeconds(1f);
         goingToFinalPosition = false;
     }
@@ -203,15 +203,35 @@ public class NPC : MonoBehaviour
         }
 
 
-    //    Debug.Log("MUERO");
+        //    Debug.Log("MUERO");
         yield return new WaitForSeconds(1f);
         FindObjectOfType<Fireplace>().GetComponentInChildren<Fireplace>().AddPower(7f);
         FindObjectOfType<Fireplace>().GetComponentInChildren<Fireplace>().ChangeFireColor(ItemType.HUMAN);
         FindObjectOfType<GameManager>().worldNPCs--;
-
+        foreach (var item in FindObjectsOfType<NPC>())
+        {
+            if (item != this)
+                item.Scare();
+        }
         yield return new WaitForSeconds(2.5f);
 
         Destroy(gameObject);
+
+    }
+
+    public void Scare()
+    {
+        if (dead)
+            return;
+        animator.SetBool("Scared", true);
+        StartCoroutine(Scared());
+    }
+
+
+    IEnumerator Scared()
+    {
+        yield return new WaitForSeconds(2f);
+        animator.SetBool("Scared", false);
 
     }
 }

@@ -145,9 +145,9 @@ public class PlayerController : MonoBehaviour
         {
             item = null;
 
-            Debug.Log("DROP IN FIRE");
-            Debug.Log(fireplace.name);
-            Debug.Log(fireplace.GetComponentInChildren<Fireplace>());
+          //  Debug.Log("DROP IN FIRE");
+          //  Debug.Log(fireplace.name);
+          //  Debug.Log(fireplace.GetComponentInChildren<Fireplace>());
             fireplace.GetComponentInChildren<Fireplace>().AddPower(obj.illumination);
             fireplace.GetComponentInChildren<Fireplace>().ChangeFireColor(obj.type);
             fireplace.GetComponentInChildren<AudioSource>().PlayOneShot(Resources.Load("Audios/throw_to_fire") as AudioClip);
