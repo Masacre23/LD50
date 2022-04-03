@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
         var player = GameObject.Find("Player");
         player.GetComponentInChildren<Animator>().SetBool("Dying", true);
         player.GetComponent<PlayerController>().enabled = false;
+        if(GameObject.Find("GlobalEffects"))
         GameObject.Find("GlobalEffects").GetComponent<AudioSource>().PlayOneShot(Resources.Load("Audios/death") as AudioClip);
         alreadyEnded = true;
         fadeDarkPanel.Fade(fadeTime);

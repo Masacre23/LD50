@@ -276,7 +276,7 @@ Transform:
   - {fileID: 436988322}
   - {fileID: 1310867897}
   m_Father: {fileID: 0}
-  m_RootOrder: 32
+  m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &147492194
 PrefabInstance:
@@ -5416,12 +5416,12 @@ GameObject:
   - component: {fileID: 1388105582}
   - component: {fileID: 1388105581}
   m_Layer: 0
-  m_Name: GlobalEffects
+  m_Name: GlobalNONOEffects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1388105581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5441,7 +5441,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1388105580}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -3199159552341468224, guid: 8681b25c233cf9644987fde48a38fadd,
     type: 2}
@@ -5538,7 +5538,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1388105580}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a50b63262aa47e44f92cb73ce0c57062, type: 3}
   m_Name: 
@@ -5555,7 +5555,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 31
+  m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1470451937
 PrefabInstance:

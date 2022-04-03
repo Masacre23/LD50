@@ -183,7 +183,8 @@ public class NPC : MonoBehaviour
         {
             audio.enabled = true;
         }
-        GameObject.Find("GlobalEffects").GetComponent<AudioSource>().PlayOneShot(Resources.Load("Audios/death") as AudioClip);
+        if (GameObject.Find("GlobalEffects"))
+            GameObject.Find("GlobalEffects").GetComponent<AudioSource>().PlayOneShot(Resources.Load("Audios/death") as AudioClip);
 
         Vector3 a = transform.position;
         a.y = 0f;

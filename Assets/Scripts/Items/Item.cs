@@ -16,15 +16,17 @@ public class Item : MonoBehaviour
     public ItemType type;
     public Vector3 rotationReference;
     private bool burned = false;
+    float t;
     private void Start()
     {
+        t = Time.time;
         transform.rotation = Random.rotation;
-        if (GetComponent<Outline>())
+        /*if (GetComponent<Outline>())
             GetComponent<Outline>().OutlineWidth = 0f;
         foreach (var item in GetComponentsInChildren<Outline>())
         {
             item.OutlineWidth = 0f;
-        }
+        } */
         FindObjectOfType<GameManager>().worldItems++;
     }
 
@@ -46,7 +48,7 @@ public class Item : MonoBehaviour
     private void Update()
     {
         //  Debug.Log(Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position));
-        if (burned)
+        if (burned )
             return;
         if (Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 8f)
         {
