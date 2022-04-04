@@ -42,7 +42,7 @@ public class Monster : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         //  Vector3 localPos = player.transform.TransformPoint(transform.position);
         //   Debug.Log();
-        if (distanceToPlayer < 5f &&
+        if (distanceToPlayer < 10f &&
             Vector3.Angle(player.transform.forward, transform.position - player.transform.position) < player.lanternAngle 
             && !avoidingPlayer)
         {
@@ -68,7 +68,7 @@ public class Monster : MonoBehaviour
             if(dest != -Vector3.one)
             {
                 agent.speed = 4f;
-                Debug.DrawLine(transform.position + Vector3.up * 2f, dest + Vector3.up * 2f, Color.red, 5f);
+              //  Debug.DrawLine(transform.position + Vector3.up * 2f, dest + Vector3.up * 2f, Color.red, 5f);
 
             }
 
@@ -103,7 +103,7 @@ public class Monster : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
             agent.speed = 8f;
-            Debug.DrawLine(transform.position + Vector3.up * 2f, d + Vector3.up * 2f, Color.blue, 5f);
+       //     Debug.DrawLine(transform.position + Vector3.up * 2f, d + Vector3.up * 2f, Color.blue, 5f);
 
             dest = d;
         }
@@ -113,7 +113,7 @@ public class Monster : MonoBehaviour
             if (dest != -Vector3.one)
             {
                 agent.speed = 2f;
-                Debug.DrawLine(transform.position + Vector3.up * 2f, dest + Vector3.up * 2f, Color.green, 5f);
+           //     Debug.DrawLine(transform.position + Vector3.up * 2f, dest + Vector3.up * 2f, Color.green, 5f);
 
             }
         }
@@ -184,7 +184,7 @@ public class Monster : MonoBehaviour
         while (followingPlayer)
         {
 
-            yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
+            yield return new WaitForSeconds(Random.Range(1f, 10f));
             Vector3 v = GetValidPointAroundPlayer();
             if(v != -Vector3.one)
             agent.SetDestination(v);
