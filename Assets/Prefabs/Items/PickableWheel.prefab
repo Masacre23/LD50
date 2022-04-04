@@ -211,6 +211,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wheel_01
       objectReference: {fileID: 0}
+    - target: {fileID: 6325200919788917031, guid: 2aa7db72761474e429efb2582ca53790,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6668828387992030109, guid: 2aa7db72761474e429efb2582ca53790,
         type: 3}
       propertyPath: m_RootOrder
