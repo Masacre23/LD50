@@ -7416,7 +7416,7 @@ PrefabInstance:
     - target: {fileID: 587746841109198586, guid: 809f5edaf46e66b47ac2de40ec61516a,
         type: 3}
       propertyPath: lanternAngle
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 634505498397744171, guid: 809f5edaf46e66b47ac2de40ec61516a,
         type: 3}
