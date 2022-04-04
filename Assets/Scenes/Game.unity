@@ -2495,7 +2495,7 @@ PrefabInstance:
     - target: {fileID: 8442159919314702053, guid: 9471cf709f1161b408defb8305cb53c2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8442159919314702053, guid: 9471cf709f1161b408defb8305cb53c2,
         type: 3}
@@ -5576,7 +5576,7 @@ TerrainCollider:
   m_GameObject: {fileID: 1461718889}
   m_Material: {fileID: 0}
   m_Enabled: 1
-  m_TerrainData: {fileID: 15600000, guid: f0678c11d092aa64a9851de420da0a94, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: 6fe6ba548238e274da423367619e08d1, type: 2}
   m_EnableTreeColliders: 1
 --- !u!218 &1461718891
 Terrain:
@@ -5587,7 +5587,7 @@ Terrain:
   m_GameObject: {fileID: 1461718889}
   m_Enabled: 1
   serializedVersion: 6
-  m_TerrainData: {fileID: 15600000, guid: f0678c11d092aa64a9851de420da0a94, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: 6fe6ba548238e274da423367619e08d1, type: 2}
   m_TreeDistance: 5000
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
@@ -5623,7 +5623,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1470451937
 PrefabInstance:
@@ -7432,7 +7432,7 @@ PrefabInstance:
     - target: {fileID: 587746841109198583, guid: 809f5edaf46e66b47ac2de40ec61516a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 587746841109198583, guid: 809f5edaf46e66b47ac2de40ec61516a,
         type: 3}
