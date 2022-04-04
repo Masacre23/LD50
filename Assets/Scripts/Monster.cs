@@ -46,16 +46,14 @@ public class Monster : MonoBehaviour
             Vector3.Angle(player.transform.forward, transform.position - player.transform.position) < player.lanternAngle
             && !avoidingPlayer)
         {
+            agent.isStopped = true;
+
             StartCoroutine(AvoidingPlayerForAWhile());
             //Debug.Log("RUN FROM PLAYER");
             t = Mathf.Infinity;
             StopCoroutine(FollowingPlayer());
-            agent.isStopped = true;
             StartCoroutine(SetNewDestination(true));
-        }
-
-
-        if (distanceToPlayer < 1f)
+        }   else if (distanceToPlayer < 1f)
             FindObjectOfType<GameManager>().GameOver();
     }
 
@@ -93,7 +91,7 @@ public class Monster : MonoBehaviour
                    */
                    
                 NavMeshHit hit;
-                if (NavMesh.SamplePosition(d, out hit, 150.0f, NavMesh.AllAreas))
+                if (NavMesh.SamplePosition(d, out hit, 200.0f, NavMesh.AllAreas))
                 {
                     d = hit.position;
                 }
@@ -104,9 +102,9 @@ public class Monster : MonoBehaviour
 
 
                 //    GameObject.Find("aae").transform.position = d;
-                yield return new WaitForEndOfFrame();
+                yield return new WaitForSeconds(Random.Range(0.2f,0.5f));
             }
-            agent.speed = 8f;
+            agent.speed = 6f;
             //     Debug.DrawLine(transform.position + Vector3.up * 2f, d + Vector3.up * 2f, Color.blue, 5f);
 
             dest = d;
