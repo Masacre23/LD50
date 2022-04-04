@@ -99,10 +99,10 @@ public class CameraFollower : MonoBehaviour
     //}
 
     private void LateUpdate() {
-        float ScrollWheelChange = Input.GetAxis("Mouse ScrollWheel");
+        //float ScrollWheelChange = Input.GetAxis("Mouse ScrollWheel");
         //float JoystickChange = Input.GetAxis("CameraXBOX");
-        if (ScrollWheelChange != 0/* || JoystickChange != 0*/) {
-            float R = ScrollWheelChange * zoomLimit;
+        //if (ScrollWheelChange != 0/* || JoystickChange != 0*/) {
+         /*   float R = ScrollWheelChange * zoomLimit;
             //if (JoystickChange != 0)
             //    R = JoystickChange;
             float PosX = Camera.main.transform.eulerAngles.x + 90;
@@ -113,7 +113,7 @@ public class CameraFollower : MonoBehaviour
             float Z = R * Mathf.Sin(PosX) * Mathf.Sin(PosY);
             float Y = R * Mathf.Cos(PosX);
             cameraPositionRelativeFinal = cameraPositionRelative + new Vector3(X, Y, Z);
-        }
+        }*/
     }
 
 
