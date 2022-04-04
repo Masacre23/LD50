@@ -30,8 +30,8 @@ Material:
     m_Floats:
     - _RampSmooth: 0.05
     - _RampThreshold: 0.5
-    - _RimMax: 0.192
-    - _RimMin: 0.374
+    - _RimMax: 0
+    - _RimMin: 0
     - _RimPower: 2.375
     - _Shininess: 0.15077282
     - _SpecSmooth: 0.05
@@ -39,7 +39,7 @@ Material:
     - _Color: {r: 0.7924528, g: 0.09344961, b: 0.09344961, a: 1}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
     - _LColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _RimColor: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 0.28235295}
+    - _RimColor: {r: 0, g: 0, b: 0, a: 0.28235295}
     - _RimDir: {r: 0, g: 0, b: 1, a: 0}
     - _SColor: {r: 0, g: 0, b: 0, a: 0.7921569}
     - _SpecColor: {r: 0.283737, g: 0.2845931, b: 0.30147058, a: 1}
