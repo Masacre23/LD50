@@ -16,6 +16,8 @@ public class NPC : MonoBehaviour
     bool waitingToDie = false;
     bool dead = false;
     System.DateTime startMoment;
+    GameManager gameManager;
+
     void Start()
     {
         startMoment = System.DateTime.Now;
@@ -34,13 +36,14 @@ public class NPC : MonoBehaviour
         models.Random().SetActive(true);
 
         animator = GetComponentInChildren<Animator>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     void Update()
     {
         if (agent.enabled)
         {
-            if (!FindObjectOfType<GameManager>().panicPhaseOn)
+            if (!gameManager.panicPhaseOn)
             {
 
                 if (agent.remainingDistance <= agent.stoppingDistance)
@@ -97,8 +100,8 @@ public class NPC : MonoBehaviour
         }
 
 
-       /* if (Vector3.Distance(FindObjectOfType<Fireplace>().transform.position, transform.position) < 3f &&
-           (Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 1f) && !dead)
+        /*if (Vector3.Distance(FindObjectOfType<Fireplace>().transform.position, transform.position) < 3f &&
+           (Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 1f) && gameManager.worldItems <= 12  && !dead)
         {
             dead = true;
             StartCoroutine(Death());
@@ -196,7 +199,7 @@ public class NPC : MonoBehaviour
         b.y = 0f;
 
         transform.rotation = Quaternion.LookRotation(a - b);
-        animator.SetTrigger("Dying");
+        animator.SetBool("Dying", true);
         float t = Time.time;
         float tInter = 0;
         float tAnim = 1f;

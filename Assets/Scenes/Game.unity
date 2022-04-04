@@ -4229,7 +4229,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &859027516
 Light:
   m_ObjectHideFlags: 0
@@ -4241,7 +4241,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.6874293, b: 0.16509432, a: 1}
   m_Intensity: 3
   m_Range: 10
   m_SpotAngle: 30
@@ -5672,6 +5672,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1223893035, guid: 01097c6da17798541914ca28fd3c819d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1518140808, guid: 01097c6da17798541914ca28fd3c819d, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.8938389
@@ -5684,11 +5688,20 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.98
       objectReference: {fileID: 0}
+    - target: {fileID: 2047546007, guid: 01097c6da17798541914ca28fd3c819d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5214210202513335297, guid: 01097c6da17798541914ca28fd3c819d,
         type: 3}
       propertyPath: satanicSymbol
       value: 
       objectReference: {fileID: 753773016}
+    - target: {fileID: 5214210204110894233, guid: 01097c6da17798541914ca28fd3c819d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7338986004527638594, guid: 01097c6da17798541914ca28fd3c819d,
         type: 3}
       propertyPath: m_Name
@@ -5751,6 +5764,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01097c6da17798541914ca28fd3c819d, type: 3}
+--- !u!1 &1482590470 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1223893035, guid: 01097c6da17798541914ca28fd3c819d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1482590469}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1569794266
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6339,12 +6358,12 @@ PrefabInstance:
     - target: {fileID: 1084753349111525001, guid: fddf9962b76310647ba397905d81707b,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 993.28
+      value: 1016.2
       objectReference: {fileID: 0}
     - target: {fileID: 1084753349111525001, guid: fddf9962b76310647ba397905d81707b,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 54.1
+      value: 94.3
       objectReference: {fileID: 0}
     - target: {fileID: 1084753349111525001, guid: fddf9962b76310647ba397905d81707b,
         type: 3}
@@ -6421,7 +6440,7 @@ PrefabInstance:
     - target: {fileID: 5047472824623470308, guid: fddf9962b76310647ba397905d81707b,
         type: 3}
       propertyPath: m_fontSize
-      value: 35.85
+      value: 36.7
       objectReference: {fileID: 0}
     - target: {fileID: 5047472824623470308, guid: fddf9962b76310647ba397905d81707b,
         type: 3}
@@ -6466,32 +6485,32 @@ PrefabInstance:
     - target: {fileID: 5047472824623470308, guid: fddf9962b76310647ba397905d81707b,
         type: 3}
       propertyPath: m_fontColorGradient.bottomLeft.b
-      value: 0.3962264
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5047472824623470308, guid: fddf9962b76310647ba397905d81707b,
         type: 3}
       propertyPath: m_fontColorGradient.bottomLeft.g
-      value: 0.3962264
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5047472824623470308, guid: fddf9962b76310647ba397905d81707b,
         type: 3}
       propertyPath: m_fontColorGradient.bottomLeft.r
-      value: 0.3962264
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5047472824623470308, guid: fddf9962b76310647ba397905d81707b,
         type: 3}
       propertyPath: m_fontColorGradient.bottomRight.b
-      value: 0.3962264
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5047472824623470308, guid: fddf9962b76310647ba397905d81707b,
         type: 3}
       propertyPath: m_fontColorGradient.bottomRight.g
-      value: 0.3962264
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5047472824623470308, guid: fddf9962b76310647ba397905d81707b,
         type: 3}
       propertyPath: m_fontColorGradient.bottomRight.r
-      value: 0.3962264
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fddf9962b76310647ba397905d81707b, type: 3}
@@ -12175,6 +12194,7 @@ MonoBehaviour:
   gameOverPopup: {fileID: 5575009744330406468}
   winGameObject: {fileID: 489290585}
   dialogText: {fileID: 216259679}
+  firePointLight: {fileID: 1482590470}
   panicPhaseOn: 0
 --- !u!4 &5492662157463716319
 Transform:
