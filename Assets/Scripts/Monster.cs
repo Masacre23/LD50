@@ -149,7 +149,7 @@ public class Monster : MonoBehaviour
             followingPlayer = false;
             return hit.position;
         }
-        waitInPlaceTime = Random.Range(0.1f, 0.2f);
+        waitInPlaceTime = Random.Range(0.1f, 1f);
         return -Vector3.one;
     }
 
@@ -169,7 +169,7 @@ public class Monster : MonoBehaviour
             StartCoroutine(FollowingPlayer());
             return hit.position;
         }
-        waitInPlaceTime = Random.Range(0.1f, 0.2f);
+        waitInPlaceTime = Random.Range(0.1f, 1f);
         return -Vector3.one;
     }
 

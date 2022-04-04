@@ -222,7 +222,8 @@ public class NPC : MonoBehaviour
         }
         yield return new WaitForSeconds(2.5f);
 
-        Destroy(gameObject);
+        this.enabled = false;
+        //Destroy(gameObject);
 
     }
 
