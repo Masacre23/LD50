@@ -25,10 +25,14 @@ public class GameManager : MonoBehaviour
             if (value < _worldItems)
                 Debug.Log("ITEMS IN THE WORLD: " + _worldItems);
 
+            if (value == 0)
+                panicPhaseOn = true;
             _worldItems = value;
 
         }
     }
+
+    public bool panicPhaseOn;
     private int _worldNPCs;
     public int worldNPCs
     {
@@ -37,6 +41,8 @@ public class GameManager : MonoBehaviour
         {
             if (value < _worldNPCs)
             {
+                panicPhaseOn = true;
+
                 Debug.Log("NPCS IN THE WORLD: " + _worldNPCs);
 
             }
@@ -62,13 +68,14 @@ public class GameManager : MonoBehaviour
             return;
 
         var player = GameObject.Find("Player");
-        player.GetComponentInChildren<Animator>().SetBool("Dying", true);
         player.GetComponent<PlayerController>().enabled = false;
+        player.GetComponentInChildren<Animator>().SetBool("Dying", true);
         if(GameObject.Find("GlobalEffects"))
         GameObject.Find("GlobalEffects").GetComponent<AudioSource>().PlayOneShot(Resources.Load("Audios/death") as AudioClip);
         alreadyEnded = true;
         fadeDarkPanel.Fade(fadeTime);
         await Task.Delay(2000);
+        FindObjectOfType<Fireplace>().ChangeFireColor(ItemType.WOOD);
         gameOverPopup.gameObject.SetActive(true);
         await Task.Delay(5000);
         SceneManager.LoadScene(1);

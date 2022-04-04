@@ -24666,6 +24666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553635a4878b8644ab4ecfca409eb077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  satanicSymbol: {fileID: 0}
   basicFire:
     serializedVersion: 2
     key0: {r: 1, g: 0.8482759, b: 0, a: 0}
@@ -24695,7 +24696,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 3
     m_NumAlphaKeys: 3
-  basicMainLightColor: {r: 1, g: 0.3882353, b: 0, a: 1}
+  basicMainLightColor: {r: 1, g: 0.654902, b: 0.34509805, a: 1}
   greenFire:
     serializedVersion: 2
     key0: {r: 0.53444123, g: 1, b: 0, a: 0}
@@ -24738,7 +24739,7 @@ MonoBehaviour:
   flame2: {fileID: 5376388013323527749}
   glow: {fileID: 5376331530180402107}
   sparks: {fileID: 5376924742584008035}
-  flamesSize: {x: 2.5, y: 5}
+  flamesSize: {x: 1, y: 5}
   flamesRange: {x: 0, y: 2.01}
   flamesAngle: {x: 5, y: 30}
   flamesQty: {x: 0, y: 15}
@@ -24892,7 +24893,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 0.38710973, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.654902, b: 0.34509805, a: 1}
   m_Intensity: 15
   m_Range: 30
   m_SpotAngle: 130

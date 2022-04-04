@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5020315131599921312}
   - component: {fileID: 5020315131599921313}
   - component: {fileID: 1939910170213121979}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Monster
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -249,10 +249,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 586307204305708298, guid: ae91af2a1781cd745aa2f66db6673792,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 586307204305850088, guid: ae91af2a1781cd745aa2f66db6673792,
         type: 3}
       propertyPath: m_Name
       value: Enemy_Particle
+      objectReference: {fileID: 0}
+    - target: {fileID: 586307204305850088, guid: ae91af2a1781cd745aa2f66db6673792,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 586307204305872586, guid: ae91af2a1781cd745aa2f66db6673792,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae91af2a1781cd745aa2f66db6673792, type: 3}
@@ -339,6 +354,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bichos
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a4cbd43b704a7324c82283da42b843de,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4cbd43b704a7324c82283da42b843de, type: 3}
 --- !u!4 &7295055383902052249 stripped
@@ -409,10 +429,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 586307204305708298, guid: ae91af2a1781cd745aa2f66db6673792,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 586307204305850088, guid: ae91af2a1781cd745aa2f66db6673792,
         type: 3}
       propertyPath: m_Name
       value: Enemy_Particle (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 586307204305850088, guid: ae91af2a1781cd745aa2f66db6673792,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 586307204305872586, guid: ae91af2a1781cd745aa2f66db6673792,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae91af2a1781cd745aa2f66db6673792, type: 3}

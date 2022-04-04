@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Fireplace : MonoBehaviour
 {
+    public Animator satanicSymbol;
     public Gradient basicFire;
     public Color basicMainLightColor;
     public Gradient greenFire;
@@ -159,6 +160,9 @@ public class Fireplace : MonoBehaviour
         float tInter = 0;
         float tAnim = 1f;
         Color ini = mainLight.color;
+        satanicSymbol.SetBool("up", newColor == greenMainLightColor);
+
+ 
         while (Time.time - t < tAnim)
         {
             tInter = (Time.time - t) / tAnim;
