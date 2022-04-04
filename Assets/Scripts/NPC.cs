@@ -100,13 +100,13 @@ public class NPC : MonoBehaviour
         }
 
 
-        /*if (Vector3.Distance(FindObjectOfType<Fireplace>().transform.position, transform.position) < 3f &&
-           (Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 1f) && gameManager.worldItems <= 12  && !dead)
+        if (((Vector3.Distance(FindObjectOfType<Fireplace>().transform.position, transform.position) < 2f &&
+           (Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 1f)) && gameManager.panicPhaseOn )&& !dead)
         {
             dead = true;
             StartCoroutine(Death());
 
-        }    */
+        }    
     }
 
     private void LateUpdate()
