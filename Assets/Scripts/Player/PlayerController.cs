@@ -77,15 +77,15 @@ public class PlayerController : MonoBehaviour
                     StartCoroutine(DropItemInFire(item, colliders.Where(c => c.gameObject.tag == "Fire").First().transform));
 
             }
-            else
-            {
+
+          
                 if (item != null)
                     StartCoroutine(DropItem(item));
 
 
                 if (colliders.Where(c => c.gameObject.tag == "Item").ToArray().Length > 0)
                     PickItem(colliders.Where(c => c.gameObject.tag == "Item").First().gameObject);
-            }
+           
         }
 
 
