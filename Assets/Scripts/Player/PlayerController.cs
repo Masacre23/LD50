@@ -39,27 +39,30 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        movement = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+        Vector3 rawmovement = new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical")).normalized;
+        movement = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical")).normalized;
         if (movement != Vector3.zero)
         {
-            //transform.rotation = Quaternion.Lerp(Quaternion.LookRotation(movement), transform.rotation, 0.45f);
-
             Quaternion q = transform.rotation;
             q = Quaternion.Lerp(Quaternion.LookRotation(Camera.main.transform.TransformDirection(movement)), transform.rotation, 0.45f);
             transform.rotation = Quaternion.Euler(0, q.eulerAngles.y, 0);
 
-            Vector3 camForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-            movement = Input.GetAxis("Vertical") * camForward + Input.GetAxis("Horizontal") * Camera.main.transform.right;
+            Vector3 nextPos = transform.forward.normalized * speed * movement.magnitude*0.02f;
 
-            movement *= speed;
 
-            if (movement.x != 0f && movement.z != 0f) movement = movement / 1.425f;
+           
+            characterController.Move(nextPos);
+            if (rawmovement != Vector3.zero)
+            animator.SetFloat("Speed", speed * movement.magnitude);
 
-            characterController.Move(movement * Time.deltaTime);
+        }
+
+        if (rawmovement == Vector3.zero)
+        {
+            animator.SetFloat("Speed", 0f);
         }
 
         animator.SetBool("HasObject", item != null);
-        animator.SetFloat("Speed", movement.magnitude);
 
         characterController.Move(Vector3.down * 20f * Time.deltaTime);
         if (Input.GetButton("Fire1") && actionKeyUp)
@@ -78,22 +81,23 @@ public class PlayerController : MonoBehaviour
 
             }
 
-          
-                if (item != null)
-                    StartCoroutine(DropItem(item));
+
+            if (item != null)
+                StartCoroutine(DropItem(item));
 
 
-                if (colliders.Where(c => c.gameObject.tag == "Item").ToArray().Length > 0)
-                    PickItem(colliders.Where(c => c.gameObject.tag == "Item").First().gameObject);
-           
+            if (colliders.Where(c => c.gameObject.tag == "Item").ToArray().Length > 0)
+                PickItem(colliders.Where(c => c.gameObject.tag == "Item").First().gameObject);
+
         }
 
 
 
     }
+
     private void Update()
     {
-       // Debug.Log(IsInsideLight());
+        // Debug.Log(IsInsideLight());
         if (!Input.GetButton("Fire1"))
         {
             actionKeyUp = true;
@@ -127,7 +131,7 @@ public class PlayerController : MonoBehaviour
         {
             item = null;
 
-          //  Debug.Log("DROP");
+            //  Debug.Log("DROP");
             actionKeyUp = false;
             obj.transform.parent = null;
 
@@ -179,7 +183,7 @@ public class PlayerController : MonoBehaviour
         //      FindObjectOfType<Fireplace>().GetLightDistance());
 
         return (Vector3.Distance(transform.position, FindObjectOfType<Fireplace>().transform.position) <
-            FindObjectOfType<Fireplace>().GetLightDistance(true) );
+            FindObjectOfType<Fireplace>().GetLightDistance(true));
 
     }
 }
