@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Speed", movement.magnitude);
 
         characterController.Move(Vector3.down * 20f * Time.deltaTime);
-        if (Input.GetKey(KeyCode.E) && actionKeyUp)
+        if (Input.GetButton("Fire1") && actionKeyUp)
         {
 
 
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
        // Debug.Log(IsInsideLight());
-        if (!Input.GetKey(KeyCode.E))
+        if (!Input.GetButton("Fire1"))
         {
             actionKeyUp = true;
 
