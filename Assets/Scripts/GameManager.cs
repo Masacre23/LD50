@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] Image gameOverPopup;
     [SerializeField] GameObject winGameObject;
     [SerializeField] GameObject dialogText;
+    [SerializeField] GameObject firePointLight;
+    Fireplace fireplace;
     bool alreadyEnded = false;
 
     private int _worldItems;
@@ -23,10 +25,10 @@ public class GameManager : MonoBehaviour
         set
         {
             if (value < _worldItems)
-                Debug.Log("ITEMS IN THE WORLD: " + _worldItems);
+                Debug.Log("ITEMS IN THE WORLD: " + (_worldItems-1));
 
-            if (value == 0)
-                panicPhaseOn = true;
+            //if (value == 12)
+              //  panicPhaseOn = true;
             _worldItems = value;
 
         }
@@ -43,7 +45,7 @@ public class GameManager : MonoBehaviour
             {
                 panicPhaseOn = true;
 
-                Debug.Log("NPCS IN THE WORLD: " + _worldNPCs);
+                Debug.Log("NPCS IN THE WORLD: " + (_worldNPCs-1));
 
             }
             _worldNPCs = value;
@@ -58,8 +60,14 @@ public class GameManager : MonoBehaviour
 
     async void Start()
     {
+        fireplace = FindObjectOfType<Fireplace>();
         await Task.Delay(10000);
         dialogText.SetActive(false);
+    }
+
+    private void Update()
+    {
+            panicPhaseOn = fireplace.power < 20 && worldItems <= 12;
     }
 
     public async void GameOver()
@@ -98,6 +106,7 @@ public class GameManager : MonoBehaviour
         //Fade verde
         fadeGreenPanel.Fade(0.5f);
         await Task.Delay(500);
+        firePointLight.SetActive(false);
         foreach (var monster in GameObject.FindGameObjectsWithTag("Monster"))
         {
             monster.SetActive(false);
