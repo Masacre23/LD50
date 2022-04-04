@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
     async void Start()
     {
         fireplace = FindObjectOfType<Fireplace>();
+        dialogText.SetActive(true);
         await Task.Delay(10000);
         dialogText.SetActive(false);
     }
@@ -114,7 +115,7 @@ public class GameManager : MonoBehaviour
         //Pasamos de verde a blanco
         fadeWhitePanel.Fade(0);
         fadeGreenPanel.Unfade(0.5f);
-        fireplace.ChangeFireColor(ItemType.HUMAN);
+        fireplace.ChangeFireColor(ItemType.WOOD);
         await Task.Delay(500);
 
         //Mostramos la escena final
@@ -127,6 +128,9 @@ public class GameManager : MonoBehaviour
         //Habilitamos el texto
         wincanvas.SetActive(true);
         await Task.Delay(10000);
+
+        fadeDarkPanel.Fade(1);
+        await Task.Delay(1000);
 
         SceneManager.LoadScene(1);
     }
