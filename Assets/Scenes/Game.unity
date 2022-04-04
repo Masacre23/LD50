@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.0072059925, g: 0.0072059925, b: 0.056579493, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7424,6 +7424,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1208228064, guid: 809f5edaf46e66b47ac2de40ec61516a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208228064, guid: 809f5edaf46e66b47ac2de40ec61516a, type: 3}
+      propertyPath: m_Intensity
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208228064, guid: 809f5edaf46e66b47ac2de40ec61516a, type: 3}
+      propertyPath: m_SpotAngle
+      value: 92.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539808587, guid: 809f5edaf46e66b47ac2de40ec61516a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 587746841109198579, guid: 809f5edaf46e66b47ac2de40ec61516a,
         type: 3}
       propertyPath: m_Name
@@ -7487,7 +7503,12 @@ PrefabInstance:
     - target: {fileID: 587746841109198586, guid: 809f5edaf46e66b47ac2de40ec61516a,
         type: 3}
       propertyPath: lanternAngle
-      value: 40
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 5907924967344386872, guid: 809f5edaf46e66b47ac2de40ec61516a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 809f5edaf46e66b47ac2de40ec61516a, type: 3}
