@@ -74,7 +74,7 @@ public class Monster : MonoBehaviour
         }
         else if (runFromPlayer)
         {
-            yield return new WaitForSecondsRealtime(2);
+            //yield return new WaitForSecondsRealtime(2);
             Vector3 d = -Vector3.one;
             while (d == -Vector3.one)
             {
@@ -178,7 +178,7 @@ public class Monster : MonoBehaviour
     {
         avoidingPlayer = true;
 
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(1);
 
         avoidingPlayer = false;
     }
