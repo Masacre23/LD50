@@ -50,7 +50,7 @@ public class Monster : MonoBehaviour
             //Debug.Log("RUN FROM PLAYER");
             t = Mathf.Infinity;
             StopCoroutine(FollowingPlayer());
-
+            agent.isStopped = true;
             StartCoroutine(SetNewDestination(true));
         }
 
@@ -84,13 +84,16 @@ public class Monster : MonoBehaviour
                 Debug.Log("ANGLE:  " + Vector3.Angle((player.transform.position - transform.position), (d - transform.position))); */
                 d = transform.position - player.transform.position;
                 d.y = 0f;
-                d = player.transform.position + d * Random.Range(20f, 40f);
+                d = player.transform.position + d*5f;
+                d.x += Random.Range(-10f, 10f);
+                d.z += Random.Range(-10f, 10f);
                 /*   if (Vector3.Distance(d, player.transform.position) < 30f && 
                        Vector3.Angle((transform.position- player.transform.position), (d-transform.position)) > 5f)
                        d = -Vector3.one;
                    */
+                   
                 NavMeshHit hit;
-                if (NavMesh.SamplePosition(d, out hit, 10.0f, NavMesh.AllAreas))
+                if (NavMesh.SamplePosition(d, out hit, 150.0f, NavMesh.AllAreas))
                 {
                     d = hit.position;
                 }
@@ -121,6 +124,7 @@ public class Monster : MonoBehaviour
 
         if (dest != -Vector3.one)
         {
+            agent.isStopped = false;
             //    Debug.Log(Vector3.Distance(FindObjectOfType<Fireplace>().transform.position, dest));
             agent.SetDestination(dest);
 
