@@ -9,7 +9,7 @@ public class Fireplace : MonoBehaviour
     public Color basicMainLightColor;
     public Gradient greenFire;
     public Color greenMainLightColor;
-    [SerializeField] private float power;
+    [SerializeField] public float power;
     [SerializeField] public Vector2 powerRange;
     [SerializeField] private float unPowerSpeed;
 
