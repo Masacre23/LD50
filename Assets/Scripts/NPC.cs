@@ -39,7 +39,8 @@ public class NPC : MonoBehaviour
     void Update()
     {
         if (agent.enabled)
-            if (FindObjectOfType<GameManager>().panicPhaseOn || (System.DateTime.Now - startMoment).TotalSeconds > 120f)
+        {
+            if (!FindObjectOfType<GameManager>().panicPhaseOn || (System.DateTime.Now - startMoment).TotalSeconds > 120f)
             {
 
                 if (agent.remainingDistance <= agent.stoppingDistance)
@@ -58,9 +59,9 @@ public class NPC : MonoBehaviour
 
                 }
             }
+
             else
             {
-
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {
                     if (!gameToEnd)
@@ -76,6 +77,7 @@ public class NPC : MonoBehaviour
                         GetComponent<NavMeshAgent>().enabled = false;
                         GetComponent<NavMeshObstacle>().enabled = true;
                         waitingToDie = true;
+                        Scare();
                     }
 
                 }
@@ -83,6 +85,7 @@ public class NPC : MonoBehaviour
 
 
             }
+        }
         else if (waitingToDie && !dead)
         {
             if (Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 1f)
@@ -159,7 +162,8 @@ public class NPC : MonoBehaviour
                 NavMeshHit hit;
                 if (NavMesh.SamplePosition(d, out hit, 5f, NavMesh.AllAreas))
                 {
-
+                    t = Time.time;
+                    waitInPlaceTime = 50f;
                     d = hit.position;
                     agent.SetDestination(d);
                 }
