@@ -23,7 +23,7 @@ public class Monster : MonoBehaviour
 
     void Update()
     {
-        if (agent.remainingDistance <= agent.stoppingDistance)
+        if (agent.remainingDistance <= agent.stoppingDistance || followingPlayer)
         {
 
 
@@ -68,7 +68,7 @@ public class Monster : MonoBehaviour
             if(dest != -Vector3.one)
             {
                 agent.speed = 4f;
-                //Debug.DrawLine(transform.position + Vector3.up * 2f, dest + Vector3.up * 2f, Color.red, 5f);
+                Debug.DrawLine(transform.position + Vector3.up * 2f, dest + Vector3.up * 2f, Color.red, 5f);
 
             }
 
@@ -103,7 +103,7 @@ public class Monster : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
             agent.speed = 8f;
-       //     Debug.DrawLine(transform.position + Vector3.up * 2f, d + Vector3.up * 2f, Color.blue, 5f);
+            Debug.DrawLine(transform.position + Vector3.up * 2f, d + Vector3.up * 2f, Color.blue, 5f);
 
             dest = d;
         }
@@ -113,7 +113,7 @@ public class Monster : MonoBehaviour
             if (dest != -Vector3.one)
             {
                 agent.speed = 2f;
-              //  Debug.DrawLine(transform.position + Vector3.up * 2f, dest + Vector3.up * 2f, Color.green, 5f);
+                Debug.DrawLine(transform.position + Vector3.up * 2f, dest + Vector3.up * 2f, Color.green, 5f);
 
             }
         }
@@ -163,6 +163,7 @@ public class Monster : MonoBehaviour
         {
             waitInPlaceTime = Random.Range(0.5f, 1f);
             followingPlayer = true;
+            StartCoroutine(FollowingPlayer());
             return hit.position;
         }
         waitInPlaceTime = Random.Range(0.1f, 0.2f);
@@ -176,5 +177,18 @@ public class Monster : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         avoidingPlayer = false;
+    }
+
+    IEnumerator FollowingPlayer()
+    {
+        while (followingPlayer)
+        {
+
+            yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
+            Vector3 v = GetValidPointAroundPlayer();
+            if(v != -Vector3.one)
+            agent.SetDestination(v);
+
+        }
     }
 }

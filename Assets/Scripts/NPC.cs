@@ -39,7 +39,7 @@ public class NPC : MonoBehaviour
     void Update()
     {
         if (agent.enabled)
-            if (FindObjectOfType<GameManager>().worldItems > 0 || (System.DateTime.Now - startMoment).TotalSeconds > 180f)
+            if (FindObjectOfType<GameManager>().panicPhaseOn || (System.DateTime.Now - startMoment).TotalSeconds > 120f)
             {
 
                 if (agent.remainingDistance <= agent.stoppingDistance)

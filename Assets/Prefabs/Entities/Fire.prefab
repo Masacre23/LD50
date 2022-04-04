@@ -24695,7 +24695,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 3
     m_NumAlphaKeys: 3
-  basicMainLightColor: {r: 1, g: 0.3882353, b: 0, a: 1}
+  basicMainLightColor: {r: 1, g: 0.654902, b: 0.34509805, a: 1}
   greenFire:
     serializedVersion: 2
     key0: {r: 0.53444123, g: 1, b: 0, a: 0}
