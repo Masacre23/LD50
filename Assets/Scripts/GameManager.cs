@@ -114,6 +114,7 @@ public class GameManager : MonoBehaviour
         //Pasamos de verde a blanco
         fadeWhitePanel.Fade(0);
         fadeGreenPanel.Unfade(0.5f);
+        fireplace.ChangeFireColor(ItemType.HUMAN);
         await Task.Delay(500);
 
         //Mostramos la escena final
