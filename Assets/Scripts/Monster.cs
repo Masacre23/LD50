@@ -23,7 +23,7 @@ public class Monster : MonoBehaviour
 
     void Update()
     {
-        if (agent.remainingDistance <= agent.stoppingDistance || followingPlayer)
+        if (agent.remainingDistance <= agent.stoppingDistance || (followingPlayer && !avoidingPlayer))
         {
 
 
@@ -43,18 +43,17 @@ public class Monster : MonoBehaviour
         //  Vector3 localPos = player.transform.TransformPoint(transform.position);
         //   Debug.Log();
         if (distanceToPlayer < 10f &&
-            Vector3.Angle(player.transform.forward, transform.position - player.transform.position) < player.lanternAngle 
+            Vector3.Angle(player.transform.forward, transform.position - player.transform.position) < player.lanternAngle
             && !avoidingPlayer)
         {
+            agent.isStopped = true;
+
             StartCoroutine(AvoidingPlayerForAWhile());
             //Debug.Log("RUN FROM PLAYER");
             t = Mathf.Infinity;
+            StopCoroutine(FollowingPlayer());
             StartCoroutine(SetNewDestination(true));
-
-        }
-
-
-        if (distanceToPlayer < 1f)
+        }   else if (distanceToPlayer < 1f)
             FindObjectOfType<GameManager>().GameOver();
     }
 
@@ -65,10 +64,10 @@ public class Monster : MonoBehaviour
         if (!player.IsInsideLight() && !runFromPlayer)
         {
             dest = GetValidPointAroundPlayer();
-            if(dest != -Vector3.one)
+            if (dest != -Vector3.one)
             {
                 agent.speed = 4f;
-              //  Debug.DrawLine(transform.position + Vector3.up * 2f, dest + Vector3.up * 2f, Color.red, 5f);
+                //  Debug.DrawLine(transform.position + Vector3.up * 2f, dest + Vector3.up * 2f, Color.red, 5f);
 
             }
 
@@ -83,13 +82,16 @@ public class Monster : MonoBehaviour
                 Debug.Log("ANGLE:  " + Vector3.Angle((player.transform.position - transform.position), (d - transform.position))); */
                 d = transform.position - player.transform.position;
                 d.y = 0f;
-                d = player.transform.position+  d * Random.Range(20f,40f);
+                d = player.transform.position + d*5f;
+                d.x += Random.Range(-10f, 10f);
+                d.z += Random.Range(-10f, 10f);
                 /*   if (Vector3.Distance(d, player.transform.position) < 30f && 
                        Vector3.Angle((transform.position- player.transform.position), (d-transform.position)) > 5f)
                        d = -Vector3.one;
                    */
+                   
                 NavMeshHit hit;
-                if (NavMesh.SamplePosition(d, out hit, 10.0f, NavMesh.AllAreas))
+                if (NavMesh.SamplePosition(d, out hit, 200.0f, NavMesh.AllAreas))
                 {
                     d = hit.position;
                 }
@@ -97,13 +99,13 @@ public class Monster : MonoBehaviour
                 {
                     d = -Vector3.one;
                 }
-             
+
 
                 //    GameObject.Find("aae").transform.position = d;
-                yield return new WaitForEndOfFrame();
+                yield return new WaitForSeconds(Random.Range(0.2f,0.5f));
             }
-            agent.speed = 8f;
-       //     Debug.DrawLine(transform.position + Vector3.up * 2f, d + Vector3.up * 2f, Color.blue, 5f);
+            agent.speed = 6f;
+            //     Debug.DrawLine(transform.position + Vector3.up * 2f, d + Vector3.up * 2f, Color.blue, 5f);
 
             dest = d;
         }
@@ -113,13 +115,14 @@ public class Monster : MonoBehaviour
             if (dest != -Vector3.one)
             {
                 agent.speed = 2f;
-           //     Debug.DrawLine(transform.position + Vector3.up * 2f, dest + Vector3.up * 2f, Color.green, 5f);
+                //     Debug.DrawLine(transform.position + Vector3.up * 2f, dest + Vector3.up * 2f, Color.green, 5f);
 
             }
         }
 
         if (dest != -Vector3.one)
         {
+            agent.isStopped = false;
             //    Debug.Log(Vector3.Distance(FindObjectOfType<Fireplace>().transform.position, dest));
             agent.SetDestination(dest);
 
@@ -174,21 +177,23 @@ public class Monster : MonoBehaviour
     {
         avoidingPlayer = true;
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(10f);
 
         avoidingPlayer = false;
     }
 
     IEnumerator FollowingPlayer()
     {
-        while (followingPlayer)
+        while (followingPlayer && !avoidingPlayer)
         {
 
             yield return new WaitForSeconds(Random.Range(1f, 10f));
-            Vector3 v = GetValidPointAroundPlayer();
-            if(v != -Vector3.one)
-            agent.SetDestination(v);
-
+            if (followingPlayer && !avoidingPlayer)
+            {
+                Vector3 v = GetValidPointAroundPlayer();
+                if (v != -Vector3.one)
+                    agent.SetDestination(v);
+            }
         }
     }
 }

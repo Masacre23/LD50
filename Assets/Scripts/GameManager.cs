@@ -88,6 +88,7 @@ public class GameManager : MonoBehaviour
 
         var player = GameObject.Find("Player");
         player.GetComponent<PlayerController>().enabled = false;
+        player.GetComponentInChildren<Animator>().SetFloat("Speed", 0f);
         alreadyEnded = true;
         foreach (var audio in GameObject.Find("Screams").GetComponents<AudioSource>())
         {
