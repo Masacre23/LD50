@@ -7284,7 +7284,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1208228064, guid: 809f5edaf46e66b47ac2de40ec61516a, type: 3}
       propertyPath: m_SpotAngle
-      value: 92.1
+      value: 51
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208228064, guid: 809f5edaf46e66b47ac2de40ec61516a, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1208228064, guid: 809f5edaf46e66b47ac2de40ec61516a, type: 3}
       propertyPath: m_CullingMask.m_Bits
@@ -7412,7 +7416,7 @@ PrefabInstance:
     - target: {fileID: 587746841109198586, guid: 809f5edaf46e66b47ac2de40ec61516a,
         type: 3}
       propertyPath: lanternAngle
-      value: 60
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 634505498397744171, guid: 809f5edaf46e66b47ac2de40ec61516a,
         type: 3}
