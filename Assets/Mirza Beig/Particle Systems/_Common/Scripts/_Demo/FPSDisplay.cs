@@ -22,7 +22,7 @@ namespace MirzaBeig
             // =================================	
             // Classes.
             // =================================
-            
+
             public class FPSDisplay : MonoBehaviour
             {
                 // =================================	
@@ -79,8 +79,13 @@ namespace MirzaBeig
 
                         int fps = Mathf.RoundToInt(fpsAccum / frameCount);
 
-                        fpsText.text = "Average FPS: " + fps;
+                        if (Input.GetKey(KeyCode.M))
+                            fpsText.text = "Average FPS: " + fps;
+                        else
+                        {
+                            fpsText.text = "";
 
+                        }
                         frameCount = 0;
                         fpsAccum = 0.0f;
                     }

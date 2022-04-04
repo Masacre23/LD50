@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
         set
         {
             if (value < _worldItems)
-                Debug.Log("ITEMS IN THE WORLD: " + _worldItems);
+                Debug.Log("ITEMS IN THE WORLD: " + (_worldItems-1));
 
             if (value == 0)
                 panicPhaseOn = true;
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
             {
                 panicPhaseOn = true;
 
-                Debug.Log("NPCS IN THE WORLD: " + _worldNPCs);
+                Debug.Log("NPCS IN THE WORLD: " + (_worldNPCs-1));
 
             }
             _worldNPCs = value;

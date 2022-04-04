@@ -174,7 +174,7 @@ public class Fireplace : MonoBehaviour
 
        
     }
-    void OnDrawGizmos()
+   /* void OnDrawGizmos()
     {
         // Draw a yellow sphere at the transform's position
         Gizmos.color = Color.yellow;
@@ -185,5 +185,5 @@ public class Fireplace : MonoBehaviour
 
         Gizmos.DrawWireSphere(transform.position, GetLightDistance(true));
     }
-
+             */
 }

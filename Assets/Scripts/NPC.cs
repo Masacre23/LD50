@@ -40,7 +40,7 @@ public class NPC : MonoBehaviour
     {
         if (agent.enabled)
         {
-            if (!FindObjectOfType<GameManager>().panicPhaseOn || (System.DateTime.Now - startMoment).TotalSeconds > 120f)
+            if (!FindObjectOfType<GameManager>().panicPhaseOn)
             {
 
                 if (agent.remainingDistance <= agent.stoppingDistance)
@@ -97,13 +97,13 @@ public class NPC : MonoBehaviour
         }
 
 
-        if (Vector3.Distance(FindObjectOfType<Fireplace>().transform.position, transform.position) < 3f &&
+       /* if (Vector3.Distance(FindObjectOfType<Fireplace>().transform.position, transform.position) < 3f &&
            (Vector3.Distance(FindObjectOfType<PlayerController>().transform.position, transform.position) < 1f) && !dead)
         {
             dead = true;
             StartCoroutine(Death());
 
-        }
+        }    */
     }
 
     private void LateUpdate()
